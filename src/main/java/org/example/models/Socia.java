@@ -13,6 +13,15 @@ public class Socia {
     String telefono;
     String email;
 
+    public Socia(String dni, String nombre, String apellidos, String fechaNac, String telefono, String email) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNac = fechaNac;
+        this.telefono = telefono;
+        this.email = email;
+    }
+
     public int getId() {
         return id;
     }

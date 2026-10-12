@@ -14,6 +14,13 @@ public class Partida {
     int plazasDeseadas;
     String hora;
 
+    public Partida(Juego juego, String fecha, int plazasDeseadas, String hora) {
+        this.juego = juego;
+        this.fecha = fecha;
+        this.plazasDeseadas = plazasDeseadas;
+        this.hora = hora;
+    }
+
     public int plazasLibres() {
         return plazasDeseadas - jugadoras.size();
     }

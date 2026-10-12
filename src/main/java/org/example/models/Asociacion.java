@@ -11,6 +11,14 @@ public class Asociacion {
     String direccion;
     String fechaApertura;
 
+    public Asociacion(String cif, String nombre, String razonSocial, String direccion, String fechaApertura) {
+        this.cif = cif;
+        this.nombre = nombre;
+        this.razonSocial = razonSocial;
+        this.direccion = direccion;
+        this.fechaApertura = fechaApertura;
+    }
+
     public String getCif() {
         return cif;
     }

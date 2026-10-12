@@ -19,6 +19,19 @@ public class Juego {
     Socia propietaria;
     String fechaAlta;
 
+    public Juego(String nombre, String autores, int minJugadores, int maxJugadores, double estimacionMinutos, String tematica, String ubicacion, JuegoEstado estado, Socia propietaria, String fechaAlta) {
+        this.nombre = nombre;
+        this.autores = autores;
+        this.minJugadores = minJugadores;
+        this.maxJugadores = maxJugadores;
+        this.estimacionMinutos = estimacionMinutos;
+        this.tematica = tematica;
+        this.ubicacion = ubicacion;
+        this.estado = estado;
+        this.propietaria = propietaria;
+        this.fechaAlta = fechaAlta;
+    }
+
     public int getId() {
         return id;
     }
@@ -65,6 +78,14 @@ public class Juego {
 
     public void setEstimacionMinutos(double estimacionMinutos) {
         this.estimacionMinutos = estimacionMinutos;
+    }
+
+    public String getTematica() {
+        return tematica;
+    }
+
+    public void setTematica(String tematica) {
+        this.tematica = tematica;
     }
 
     public String getUbicacion() {
