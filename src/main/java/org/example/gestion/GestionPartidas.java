@@ -99,9 +99,10 @@ public class GestionPartidas {
     private void crear() {
         Partida partida = peidrDatos();
         if (partida == null) {
-            System.out.println("Elemento no encontrado.");
+            System.out.println("Fallo al conseguir los datos");
             return;
         }
+        
         if (repoPartida.add(partida)) {
             System.out.println("Acción terminada correctamente.");
         } else {
@@ -118,6 +119,11 @@ public class GestionPartidas {
         }
 
         Partida partidaActualizada = peidrDatos();
+        if (partidaActualizada == null) {
+            System.out.println("Fallo al conseguir los datos");
+            return;
+        }
+
         partida.setJuego(partidaActualizada.getJuego());
         partida.setFecha(partidaActualizada.getFecha());
         partida.setPlazasDeseadas(partidaActualizada.getPlazasDeseadas());

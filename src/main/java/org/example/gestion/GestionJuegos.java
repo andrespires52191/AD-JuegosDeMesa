@@ -100,7 +100,7 @@ public class GestionJuegos {
     private void crear() {
         Juego juego = peidrDatos();
         if (juego == null) {
-            System.out.println("Elemento no encontrado.");
+            System.out.println("Fallo al conseguir los datos");
             return;
         }
 
@@ -120,6 +120,11 @@ public class GestionJuegos {
         }
 
         Juego juegoActualizado = peidrDatos();
+        if (juegoActualizado == null) {
+            System.out.println("Fallo al conseguir los datos");
+            return;
+        }
+
         juego.setNombre(juegoActualizado.getNombre());
         juego.setAutores(juegoActualizado.getAutores());
         juego.setMinJugadores(juegoActualizado.getMinJugadores());

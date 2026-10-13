@@ -83,9 +83,10 @@ public class GestionSocias {
     private void crear() {
         Socia socia = peidrDatos();
         if (socia == null) {
-            System.out.println("Elemento no encontrado.");
+            System.out.println("Fallo al conseguir los datos");
             return;
         }
+
         if (repoSocia.add(socia)) {
             System.out.println("Acción terminada correctamente.");
         } else {
@@ -102,6 +103,11 @@ public class GestionSocias {
         }
 
         Socia sociaActualizada = peidrDatos();
+        if (sociaActualizada == null) {
+            System.out.println("Fallo al conseguir los datos");
+            return;
+        }
+
         socia.setDni(sociaActualizada.getDni());
         socia.setNombre(sociaActualizada.getNombre());
         socia.setApellidos(sociaActualizada.getApellidos());
