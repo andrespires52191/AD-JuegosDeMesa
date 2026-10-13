@@ -11,14 +11,14 @@ public class Partida {
     List<String> jugadoras;
     Juego juego;
     String fecha;
-    int plazasDeseadas;
     String hora;
+    int plazasDeseadas;
 
-    public Partida(Juego juego, String fecha, int plazasDeseadas, String hora) {
+    public Partida(Juego juego, String fecha, String hora, int plazasDeseadas) {
         this.juego = juego;
         this.fecha = fecha;
-        this.plazasDeseadas = plazasDeseadas;
         this.hora = hora;
+        this.plazasDeseadas = plazasDeseadas;
     }
 
     public int plazasLibres() {

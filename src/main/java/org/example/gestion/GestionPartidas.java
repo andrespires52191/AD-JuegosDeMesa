@@ -90,7 +90,7 @@ public class GestionPartidas {
             }
             assert juego != null;
 
-            partida = new Partida(juego, fecha, plazasDeseadas, hora);
+            partida = new Partida(juego, fecha, hora, plazasDeseadas);
         } catch (Exception ignored) {
         }
         return partida;
@@ -102,7 +102,7 @@ public class GestionPartidas {
             System.out.println("Fallo al conseguir los datos");
             return;
         }
-        
+
         if (repoPartida.add(partida)) {
             System.out.println("Acción terminada correctamente.");
         } else {
