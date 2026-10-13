@@ -15,26 +15,26 @@ public class SociaRepositoryImpl implements SociaRepository {
 
     @Override
     public List<Socia> getSocias() {
-        return null;
+        return sociaDao.getSocias();
     }
 
     @Override
     public Socia getSocia(int socia_id) {
-        return null;
+        return sociaDao.getSocia(socia_id);
     }
 
     @Override
     public boolean add(Socia socia) {
-        return false;
+        return sociaDao.add(socia);
     }
 
     @Override
     public boolean update(Socia socia) {
-        return false;
+        return sociaDao.update(socia);
     }
 
     @Override
     public boolean delete(int sociaId) {
-        return false;
+        return sociaDao.delete(sociaId);
     }
 }

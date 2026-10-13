@@ -34,7 +34,7 @@ public class AsociacionDaoImpl implements AsociacionDao {
 
     @Override
     public boolean update(Asociacion asociacion) {
-        String query = "update asociacion set cif = ?, nombre = ?, razon_social = ?, direccion = ?, fecha_apertura = ? where id = 1 ";
+        String query = "update asociacion set cif=?, nombre=?, razon_social=?, direccion=?, fecha_apertura=? where id=1 ";
         PreparedStatement ps;
         int rs = 0;
         try {
@@ -45,7 +45,7 @@ public class AsociacionDaoImpl implements AsociacionDao {
             ps.setString(3, asociacion.getRazonSocial());
             ps.setString(4, asociacion.getDireccion());
             ps.setString(5, asociacion.getFechaApertura());
-            
+
             rs = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
