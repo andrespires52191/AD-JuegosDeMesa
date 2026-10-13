@@ -15,26 +15,26 @@ public class JuegoRepositoryImpl implements JuegoRepository {
 
     @Override
     public List<Juego> getJuegos() {
-        return null;
+        return juegoDao.getJuegos();
     }
 
     @Override
     public Juego getJuego(int juegoId) {
-        return null;
+        return juegoDao.getJuego(juegoId);
     }
 
     @Override
     public boolean add(Juego juego) {
-        return false;
+        return juegoDao.add(juego);
     }
 
     @Override
     public boolean update(Juego juego) {
-        return false;
+        return juegoDao.update(juego);
     }
 
     @Override
     public boolean delete(int juegoId) {
-        return false;
+        return juegoDao.delete(juegoId);
     }
 }
