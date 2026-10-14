@@ -14,4 +14,10 @@ public interface PartidaDao {
     boolean update(Partida partida);
 
     boolean delete(int id_partida);
+
+    List<String> getJugadoras(int partida_id);
+
+    boolean agregarJugadora(int partidaId, String jugadora);
+
+    boolean quitarJugadora(int partidaId, String jugadora);
 }

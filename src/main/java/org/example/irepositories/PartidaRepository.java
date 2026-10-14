@@ -15,7 +15,9 @@ public interface PartidaRepository {
 
     boolean delete(int partidaId);
 
-    boolean agregarJugador(String jugador);
+    List<String> getJugadoras(int partidaId);
 
-    boolean quitarJugador(String jugador);
+    boolean agregarJugadora(int partidaId, String jugadora);
+
+    boolean quitarJugadora(int partidaId, String jugadora);
 }

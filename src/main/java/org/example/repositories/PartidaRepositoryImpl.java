@@ -39,12 +39,17 @@ public class PartidaRepositoryImpl implements PartidaRepository {
     }
 
     @Override
-    public boolean agregarJugador(String jugador) {
-        return false;
+    public List<String> getJugadoras(int partidaId) {
+        return partidaDao.getJugadoras(partidaId);
     }
 
     @Override
-    public boolean quitarJugador(String jugador) {
-        return false;
+    public boolean agregarJugadora(int partidaId, String jugadora) {
+        return partidaDao.agregarJugadora(partidaId, jugadora);
+    }
+
+    @Override
+    public boolean quitarJugadora(int partidaId, String jugadora) {
+        return partidaDao.quitarJugadora(partidaId, jugadora);
     }
 }

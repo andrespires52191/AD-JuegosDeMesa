@@ -8,6 +8,8 @@ import org.example.utils.ExportadorJSON;
 import org.example.utils.ExportadorXML;
 import org.example.utils.SalidaDatos;
 
+import java.util.List;
+
 import static org.example.utils.EntradaDatos.preguntar;
 
 public class GestionPartidas {
@@ -19,14 +21,15 @@ public class GestionPartidas {
         this.repoJuego = repoJuego;
 
         final String MENU = "1) Ver lista de Partidas"
-                + "\n2) Crear Partida"
-                + "\n3) Editar Partida"
-                + "\n4) Borrar Partida"
-                + "\n5) Agregar Jugadores"
-                + "\n6) Quitar Jugadores"
-                + "\n7) Exportar partidas.xml"
-                + "\n8) Exportar partidas.json"
-                + "\n9) Volver al menú principal";
+                + "\n2) Mostrar Partida"
+                + "\n3) Crear Partida"
+                + "\n4) Editar Partida"
+                + "\n5) Borrar Partida"
+                + "\n6) Agregar Jugadoras"
+                + "\n7) Quitar Jugadoras"
+                + "\n8) Exportar partidas.xml"
+                + "\n9) Exportar partidas.json"
+                + "\n10) Volver al menú principal";
 
         int accion = -1;
         while (accion != 9) {
@@ -41,27 +44,30 @@ public class GestionPartidas {
                     listar();
                     break;
                 case 2:
-                    crear();
+                    mostrar();
                     break;
                 case 3:
-                    editar();
+                    crear();
                     break;
                 case 4:
-                    borrar();
+                    editar();
                     break;
                 case 5:
-                    agregarJugadores();
+                    borrar();
                     break;
                 case 6:
-                    quitarJugadores();
+                    agregarJugadora();
                     break;
                 case 7:
-                    exportarXML();
+                    quitarJugadora();
                     break;
                 case 8:
-                    exportarJSON();
+                    exportarXML();
                     break;
                 case 9:
+                    exportarJSON();
+                    break;
+                case 10:
                     // condición de fin de bucle
                     break;
                 default:
@@ -73,6 +79,31 @@ public class GestionPartidas {
 
     private void listar() {
         SalidaDatos.mostrarLista(repoPartida.getPartidas());
+    }
+
+    private void mostrar() {
+        Partida partida = null;
+        try {
+            int partida_id = Integer.parseInt(preguntar("id: "));
+            partida = repoPartida.getPartida(partida_id);
+        } catch (NumberFormatException ignored) {
+        }
+
+        if (partida == null) {
+            System.out.println("Fallo al conseguir los datos");
+            return;
+        }
+
+        List<String> jugadoras = repoPartida.getJugadoras(partida.getId());
+        System.out.println("id: " + partida.getId());
+        System.out.println("juego: " + partida.getJuego());
+        System.out.println("fecha: " + partida.getFecha());
+        System.out.println("hora: " + partida.getHora());
+        System.out.println("plazasDeseadas: " + partida.getPlazasDeseadas());
+        System.out.println("jugadoras");
+        for (String j : jugadoras) {
+            System.out.println("\t- " + j);
+        }
     }
 
     private Partida peidrDatos() {
@@ -151,18 +182,40 @@ public class GestionPartidas {
         }
     }
 
-    private void agregarJugadores() {
-        String jugador = preguntar("nombre de jugador: ");
-        if (repoPartida.agregarJugador(jugador)) {
+    private void agregarJugadora() {
+        int partida_id = 0;
+        try {
+            partida_id = Integer.parseInt(preguntar("id: "));
+        } catch (NumberFormatException ignored) {
+        }
+
+        if (partida_id == 0) {
+            System.out.println("Fallo al conseguir los datos");
+            return;
+        }
+
+        String jugadora = preguntar("nombre de jugadora: ");
+        if (repoPartida.agregarJugadora(partida_id, jugadora)) {
             System.out.println("Acción terminada correctamente.");
         } else {
             System.out.println("Error al completar la acción.");
         }
     }
 
-    private void quitarJugadores() {
-        String jugador = preguntar("nombre de jugador: ");
-        if (repoPartida.quitarJugador(jugador)) {
+    private void quitarJugadora() {
+        int partida_id = 0;
+        try {
+            partida_id = Integer.parseInt(preguntar("id: "));
+        } catch (NumberFormatException ignored) {
+        }
+
+        if (partida_id == 0) {
+            System.out.println("Fallo al conseguir los datos");
+            return;
+        }
+
+        String jugadora = preguntar("nombre de jugadora: ");
+        if (repoPartida.quitarJugadora(partida_id, jugadora)) {
             System.out.println("Acción terminada correctamente.");
         } else {
             System.out.println("Error al completar la acción.");
