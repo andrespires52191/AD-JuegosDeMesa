@@ -30,7 +30,26 @@ public class PartidaDaoImpl implements PartidaDao {
 
     @Override
     public boolean update(Partida partida) {
-        return false;
+        String query = "update partidas set jugador=?, juego_id=?, fecha=?, hora=?, plazas_deseadas=? where id=?";
+        PreparedStatement ps;
+        int rs = 0;
+        try {
+            ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
+
+            ps.setString(1, partida.getJu);
+            ps.setString(2, partida.getNombre());
+            ps.setString(3, partida.getApellidos());
+            ps.setString(4, partida.getFechaNac());
+            ps.setString(5, partida.getApellidos());
+            ps.setString(6, partida.getEmail());
+
+            ps.setInt(7, partida.getId());
+
+            rs = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (rs > 0);
     }
 
     @Override

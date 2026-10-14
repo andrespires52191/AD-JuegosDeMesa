@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2026 a las 19:24:47
+-- Tiempo de generación: 14-10-2026 a las 20:21:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -71,7 +71,6 @@ CREATE TABLE `juegos` (
 
 CREATE TABLE `partidas` (
   `id` int(11) NOT NULL,
-  `jugador` text NOT NULL,
   `juego_id` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `hora` text NOT NULL,
