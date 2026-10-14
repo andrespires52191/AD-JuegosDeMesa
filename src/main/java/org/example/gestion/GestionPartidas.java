@@ -95,12 +95,14 @@ public class GestionPartidas {
         }
 
         List<String> jugadoras = repoPartida.getJugadoras(partida.getId());
+        repoPartida.cargarJuegoDesdeId(partida);
+
         System.out.println("id: " + partida.getId());
         System.out.println("juego: " + partida.getJuego());
         System.out.println("fecha: " + partida.getFecha());
         System.out.println("hora: " + partida.getHora());
         System.out.println("plazasDeseadas: " + partida.getPlazasDeseadas());
-        System.out.println("jugadoras");
+        System.out.println("jugadoras:");
         for (String j : jugadoras) {
             System.out.println("\t- " + j);
         }

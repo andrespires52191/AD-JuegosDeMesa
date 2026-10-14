@@ -26,7 +26,7 @@ public class App {
         // Repos
         JuegoRepositoryImpl repoJuego = new JuegoRepositoryImpl(juegoDao);
         SociaRepositoryImpl repoSocia = new SociaRepositoryImpl(sociaDao);
-        PartidaRepositoryImpl repoPartida = new PartidaRepositoryImpl(partidaDao);
+        PartidaRepositoryImpl repoPartida = new PartidaRepositoryImpl(partidaDao, juegoDao);
 
         // titulo inicio
         Asociacion asociacion = asociacionDao.getAsociacion();

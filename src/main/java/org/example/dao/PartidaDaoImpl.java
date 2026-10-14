@@ -173,7 +173,7 @@ public class PartidaDaoImpl implements PartidaDao {
 
     @Override
     public boolean quitarJugadora(int partidaId, String jugadora) {
-        String query = "delete from partidas_jugadoras where partida_id=? and jugarora=?";
+        String query = "delete from partidas_jugadoras where partida_id=? and jugadora=?";
         PreparedStatement ps;
         int rs = 0;
         try {
