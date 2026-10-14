@@ -3,7 +3,6 @@ package org.example.repositories;
 import org.example.dao.JuegoDaoImpl;
 import org.example.dao.PartidaDaoImpl;
 import org.example.irepositories.PartidaRepository;
-import org.example.models.Juego;
 import org.example.models.Partida;
 
 import java.util.List;
@@ -24,7 +23,12 @@ public class PartidaRepositoryImpl implements PartidaRepository {
 
     @Override
     public Partida getPartida(int partidaId) {
-        return partidaDao.getPartida(partidaId);
+        Partida partida = partidaDao.getPartida(partidaId);
+
+        int juego_id = partida.getJuego().getId();
+        partida.setJuego(juegoDao.getJuego(juego_id));
+
+        return partida;
     }
 
     @Override
@@ -55,12 +59,5 @@ public class PartidaRepositoryImpl implements PartidaRepository {
     @Override
     public boolean quitarJugadora(int partidaId, String jugadora) {
         return partidaDao.quitarJugadora(partidaId, jugadora);
-    }
-
-    @Override
-    public void cargarJuegoDesdeId(Partida partida) {
-        int juego_id = partida.getJuegoId();
-        Juego juego = juegoDao.getJuego(juego_id);
-        partida.setJuego(juego);
     }
 }

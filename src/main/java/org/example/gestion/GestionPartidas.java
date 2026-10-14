@@ -95,7 +95,6 @@ public class GestionPartidas {
         }
 
         List<String> jugadoras = repoPartida.getJugadoras(partida.getId());
-        repoPartida.cargarJuegoDesdeId(partida);
 
         System.out.println("id: " + partida.getId());
         System.out.println("juego: " + partida.getJuego());

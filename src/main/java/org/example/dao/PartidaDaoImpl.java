@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.idao.PartidaDao;
+import org.example.models.Juego;
 import org.example.models.Partida;
 import org.example.utils.DatabaseConnection;
 
@@ -52,7 +53,7 @@ public class PartidaDaoImpl implements PartidaDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 partida = new Partida(
-                        rs.getInt("juego_id"),
+                        new Juego(rs.getInt("juego_id")),
                         rs.getString("fecha"),
                         rs.getString("hora"),
                         rs.getInt("plazas_deseadas"));

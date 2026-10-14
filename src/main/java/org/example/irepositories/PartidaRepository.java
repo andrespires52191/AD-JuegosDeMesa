@@ -20,6 +20,4 @@ public interface PartidaRepository {
     boolean agregarJugadora(int partidaId, String jugadora);
 
     boolean quitarJugadora(int partidaId, String jugadora);
-
-    void cargarJuegoDesdeId(Partida partida);
 }

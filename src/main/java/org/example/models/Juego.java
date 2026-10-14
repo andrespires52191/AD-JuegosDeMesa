@@ -19,6 +19,10 @@ public class Juego {
     Socia propietaria;
     String fechaAlta;
 
+    public Juego(int id) {
+        this.id = id;
+    }
+
     public Juego(String nombre, String autores, int minJugadores, int maxJugadores, double estimacionMinutos, String tematica, String ubicacion, JuegoEstado estado, Socia propietaria, String fechaAlta) {
         this.nombre = nombre;
         this.autores = autores;
