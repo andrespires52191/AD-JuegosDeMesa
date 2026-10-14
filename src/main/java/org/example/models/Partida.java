@@ -10,12 +10,20 @@ public class Partida {
     int id;
     List<String> jugadoras;
     Juego juego;
+    int juego_id;
     String fecha;
     String hora;
     int plazasDeseadas;
 
     public Partida(Juego juego, String fecha, String hora, int plazasDeseadas) {
         this.juego = juego;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.plazasDeseadas = plazasDeseadas;
+    }
+
+    public Partida(int juego_id, String fecha, String hora, int plazasDeseadas) {
+        this.juego_id = juego_id;
         this.fecha = fecha;
         this.hora = hora;
         this.plazasDeseadas = plazasDeseadas;
