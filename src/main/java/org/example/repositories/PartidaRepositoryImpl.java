@@ -25,8 +25,10 @@ public class PartidaRepositoryImpl implements PartidaRepository {
     public Partida getPartida(int partidaId) {
         Partida partida = partidaDao.getPartida(partidaId);
 
-        int juego_id = partida.getJuego().getId();
-        partida.setJuego(juegoDao.getJuego(juego_id));
+        if (partida != null) {
+            int juego_id = partida.getJuego().getId();
+            partida.setJuego(juegoDao.getJuego(juego_id));
+        }
 
         return partida;
     }

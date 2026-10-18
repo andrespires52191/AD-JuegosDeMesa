@@ -24,8 +24,10 @@ public class PartidaDaoImpl implements PartidaDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                Juego juego = new Juego(rs.getInt("juego_id"));
+
                 Partida partida = new Partida(
-                        rs.getInt("juego_id"),
+                        juego,
                         rs.getString("fecha"),
                         rs.getString("hora"),
                         rs.getInt("plazas_deseadas"));
@@ -74,7 +76,14 @@ public class PartidaDaoImpl implements PartidaDao {
             // Para recuperar el id se usa Statement.RETURN_GENERATED_KEYS. Más información abajo.
             ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, partida.getJuego().getId());
+            Juego juego = partida.getJuego();
+            if (juego == null) {
+//                ps.setNull(1, java.sql.Types.INTEGER);
+//                System.out.println("juego null");
+                return false;
+            } else {
+                ps.setInt(1, juego.getId());
+            }
             ps.setString(2, partida.getFecha());
             ps.setString(3, partida.getHora());
             ps.setInt(4, partida.getPlazasDeseadas());
@@ -96,13 +105,25 @@ public class PartidaDaoImpl implements PartidaDao {
 
     @Override
     public boolean update(Partida partida) {
+        if (partida == null) {
+            System.out.println("partida null");
+            return false;
+        }
+
         String query = "update partidas set juego_id=?, fecha=?, hora=?, plazas_deseadas=? where id=?";
         PreparedStatement ps;
         int rs = 0;
         try {
             ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
 
-            ps.setInt(1, partida.getJuego().getId());
+            Juego juego = partida.getJuego();
+            if (juego == null) {
+//                ps.setNull(1, java.sql.Types.INTEGER);
+//                System.out.println("juego null");
+                return false;
+            } else {
+                ps.setInt(1, juego.getId());
+            }
             ps.setString(2, partida.getFecha());
             ps.setString(3, partida.getHora());
             ps.setInt(4, partida.getPlazasDeseadas());

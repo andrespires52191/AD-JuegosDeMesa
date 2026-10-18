@@ -10,20 +10,12 @@ public class Partida {
     int id;
     List<String> jugadoras;
     Juego juego;
-    int juegoId;
     String fecha;
     String hora;
     int plazasDeseadas;
 
     public Partida(Juego juego, String fecha, String hora, int plazasDeseadas) {
         this.juego = juego;
-        this.fecha = fecha;
-        this.hora = hora;
-        this.plazasDeseadas = plazasDeseadas;
-    }
-
-    public Partida(int juegoId, String fecha, String hora, int plazasDeseadas) {
-        this.juegoId = juegoId;
         this.fecha = fecha;
         this.hora = hora;
         this.plazasDeseadas = plazasDeseadas;
@@ -55,14 +47,6 @@ public class Partida {
 
     public void setJuego(Juego juego) {
         this.juego = juego;
-    }
-
-    public int getJuegoId() {
-        return juegoId;
-    }
-
-    public void setJuegoId(int juegoId) {
-        this.juegoId = juegoId;
     }
 
     public String getFecha() {
