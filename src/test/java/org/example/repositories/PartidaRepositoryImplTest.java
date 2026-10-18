@@ -55,5 +55,8 @@ class PartidaRepositoryImplTest {
         // volver comprobar borrado
         partida = partidaRepo.getPartida(partida.getId());
         assert partida == null;
+
+        // limpiar
+        assert juegoRepo.delete(juego.getId());
     }
 }

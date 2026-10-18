@@ -76,7 +76,7 @@ public class JuegoDaoImpl implements JuegoDao {
                 " j.nombre, j.autores, j.min_jugadores, j.max_jugadores, j.estimacion_minutos," +
                 " j.tematica, j.ubicacion, j.estado, j.propietaria_id, j.fecha_alta," +
                 " s.dni as s_dni, s.nombre as s_nombre, s.apellidos as s_apellidos," +
-                " s.fecha_nac as s_fecha_nac, s.telefono as s_telefono, s.email as s_eamil" +
+                " s.fecha_nac as s_fecha_nac, s.telefono as s_telefono, s.email as s_email" +
                 " from juegos j" +
                 " left join socias s on j.propietaria_id = s.id" +
                 " where j.id=?";

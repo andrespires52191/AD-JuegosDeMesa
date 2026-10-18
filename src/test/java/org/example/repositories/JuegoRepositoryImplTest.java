@@ -1,15 +1,28 @@
 package org.example.repositories;
 
 import org.example.dao.JuegoDaoImpl;
+import org.example.dao.SociaDaoImpl;
 import org.example.models.Juego;
 import org.example.models.JuegoEstado;
+import org.example.models.Socia;
 import org.junit.jupiter.api.Test;
 
 class JuegoRepositoryImplTest {
     private JuegoRepositoryImpl juegoRepo = new JuegoRepositoryImpl(new JuegoDaoImpl());
+    private SociaRepositoryImpl sociaRepo = new SociaRepositoryImpl(new SociaDaoImpl());
 
     @Test
     void testCombinado() {
+        Socia socia = new Socia(
+                "dni",
+                "nombre",
+                "apellidos",
+                "1999-01-01",
+                "123456789",
+                "email");
+        sociaRepo.add(socia);
+        assert socia.getId() > 0;
+
         Juego juego = new Juego(
                 "nombre",
                 "autor1, autor2",
@@ -19,7 +32,7 @@ class JuegoRepositoryImplTest {
                 "tematica",
                 "ubicacion",
                 JuegoEstado.DISPONIBLE,
-                null,
+                socia,
                 "2026-10-01");
 
         // comprobar creacion
@@ -42,5 +55,8 @@ class JuegoRepositoryImplTest {
         assert juegoRepo.delete(juego.getId());
         // volver comprobar borrado
         assert juegoRepo.getJuego(juego.getId()) == null;
+
+        // limpiar
+        assert sociaRepo.delete(socia.getId());
     }
 }
