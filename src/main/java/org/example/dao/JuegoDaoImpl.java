@@ -22,7 +22,7 @@ public class JuegoDaoImpl implements JuegoDao {
                 " j.id, j.nombre, j.autores, j.min_jugadores, j.max_jugadores, j.estimacion_minutos," +
                 " j.tematica, j.ubicacion, j.estado, j.propietaria_id, j.fecha_alta," +
                 " s.dni as s_dni, s.nombre as s_nombre, s.apellidos as s_apellidos," +
-                " s.fecha_nac as s_fecha_nac, s.telefono as s_telefono, s.email as s_eamil" +
+                " s.fecha_nac as s_fecha_nac, s.telefono as s_telefono, s.email as s_email" +
                 " from juegos j" +
                 " left join socias s on j.propietaria_id = s.id";
         PreparedStatement ps = null;
@@ -50,7 +50,7 @@ public class JuegoDaoImpl implements JuegoDao {
                         rs.getString("autores"),
                         rs.getInt("min_jugadores"),
                         rs.getInt("max_jugadores"),
-                        rs.getInt("estimacion_minutos"),
+                        rs.getDouble("estimacion_minutos"),
                         rs.getString("tematica"),
                         rs.getString("ubicacion"),
                         JuegoEstado.valueOf(rs.getString("estado")),
@@ -104,7 +104,7 @@ public class JuegoDaoImpl implements JuegoDao {
                         rs.getString("autores"),
                         rs.getInt("min_jugadores"),
                         rs.getInt("max_jugadores"),
-                        rs.getInt("estimacion_minutos"),
+                        rs.getDouble("estimacion_minutos"),
                         rs.getString("tematica"),
                         rs.getString("ubicacion"),
                         JuegoEstado.valueOf(rs.getString("estado")),

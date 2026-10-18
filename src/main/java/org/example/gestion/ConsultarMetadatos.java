@@ -30,33 +30,33 @@ public class ConsultarMetadatos {
             System.out.println("URL:" + url);
             System.out.println("Usuario: " + usuario);
 
-            resul = dbmd.getTables(null, "ejemplo", null, null);
+            resul = dbmd.getTables("juegos_de_mesa", null, null, null);
             while (resul.next()) {
                 String catalogo = resul.getString(1);//columna 1 que devuelve ResulSet
                 String esquema = resul.getString(2); //columna 2
                 String tabla = resul.getString(3);   //columna 3
-                String tipo = resul.getString(4);
-                //columna 4
+                String tipo = resul.getString(4);    //columna 4
                 System.out.println(tipo + " - Catalogo: " + catalogo + ", Esquema : " + esquema + ", Nombre : " + tabla);
             } //Fin del while
 
             System.out.println();
-            System.out.println("COLUMNAS TABLA DEPARTAMENTOS");
+            System.out.println("COLUMNAS DE TABLAS");
             System.out.println("============================");
 
-            String[] nombresTablas = {"juegos", "socias", "partidas"};
+            String[] nombresTablas = {"asociacion", "juegos", "socias", "partidas", "partidas_jugadoras"};
             for (String nombreTabla : nombresTablas) {
+                System.out.println();
                 System.out.println(nombreTabla);
                 System.out.println("----------------------------");
 
                 ResultSet columnas = null;
-                columnas = dbmd.getColumns(null, "ejemplo", nombreTabla, null);
+                columnas = dbmd.getColumns("juegos_de_mesa", null, nombreTabla, null);
                 while (columnas.next()) {
                     String nombCol = columnas.getString("COLUMN_NAME");
                     String tipoCol = columnas.getString("TYPE_NAME");
                     String tamCol = columnas.getString("COLUMN_SIZE");
                     String nula = columnas.getString("IS_NULLABLE");
-                    System.out.printf("Columna:%s, Tipo:%s, Tamaño: %s, ¿Puede ser nula? %s", nombCol, tipoCol, tamCol, nula);
+                    System.out.printf("Columna: %s, Tipo:%s, Tamaño: %s, ¿Puede ser nula? %s\n", nombCol, tipoCol, tamCol, nula);
                 }
             }
         } //Fin del try

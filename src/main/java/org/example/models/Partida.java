@@ -21,10 +21,6 @@ public class Partida {
         this.plazasDeseadas = plazasDeseadas;
     }
 
-    public int plazasLibres() {
-        return plazasDeseadas - jugadoras.size();
-    }
-
     public int getId() {
         return id;
     }

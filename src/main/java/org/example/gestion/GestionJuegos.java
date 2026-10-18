@@ -88,7 +88,6 @@ public class GestionJuegos {
             if (propietaria_id > 0) {
                 propietaria = repoSocia.getSocia(propietaria_id);
             }
-            assert propietaria != null;
 
             juego = new Juego(nombre, autores, minJugadores, maxJugadores, estimacionMinutos,
                     tematica, ubicacion, estado, propietaria, fechaAlta);
@@ -112,7 +111,14 @@ public class GestionJuegos {
     }
 
     private void editar() {
-        int juego_id = Integer.parseInt(preguntar("id: "));
+        int juego_id = 0;
+        try {
+            juego_id = Integer.parseInt(EntradaDatos.preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
         Juego juego = repoJuego.getJuego(juego_id);
         if (juego == null) {
             System.out.println("Elemento no encontrado.");
@@ -144,7 +150,14 @@ public class GestionJuegos {
     }
 
     private void borrar() {
-        int juego_id = Integer.parseInt(preguntar("id: "));
+        int juego_id = 0;
+        try {
+            juego_id = Integer.parseInt(EntradaDatos.preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
         Juego juego = repoJuego.getJuego(juego_id);
         if (juego == null) {
             System.out.println("Juego no existe.");

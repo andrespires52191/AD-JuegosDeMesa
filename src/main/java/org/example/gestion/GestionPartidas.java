@@ -32,7 +32,7 @@ public class GestionPartidas {
                 + "\n10) Volver al menú principal";
 
         int accion = -1;
-        while (accion != 9) {
+        while (accion != 10) {
             try {
                 accion = Integer.parseInt(preguntar("Elija una opción:\n" + MENU + "\n\nAcción: "));
             } catch (NumberFormatException e) {
@@ -120,8 +120,10 @@ public class GestionPartidas {
             if (juego_id > 0) {
                 juego = repoJuego.getJuego(juego_id);
             }
-            assert juego != null;
-
+            if (juego == null) {
+                return null;
+            }
+            
             partida = new Partida(juego, fecha, hora, plazasDeseadas);
         } catch (Exception ignored) {
         }
@@ -190,8 +192,14 @@ public class GestionPartidas {
         } catch (NumberFormatException ignored) {
         }
 
-        if (partida_id == 0) {
+        Partida partida = repoPartida.getPartida(partida_id);
+        if (partida == null) {
             System.out.println("Fallo al conseguir los datos");
+            return;
+        }
+
+        if (repoPartida.getJugadoras(partida_id).size() >= partida.getPlazasDeseadas()) {
+            System.out.println("No quedan más plazas disponibles.");
             return;
         }
 

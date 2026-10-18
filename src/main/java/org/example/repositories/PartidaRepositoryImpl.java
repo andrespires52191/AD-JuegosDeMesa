@@ -18,7 +18,15 @@ public class PartidaRepositoryImpl implements PartidaRepository {
 
     @Override
     public List<Partida> getPartidas() {
-        return partidaDao.getPartidas();
+        List<Partida> lista = partidaDao.getPartidas();
+
+        for (Partida partida : lista) {
+            int juegoId = partida.getJuego().getId();
+            partida.setJuego(juegoDao.getJuego(juegoId));
+            partida.setJugadoras(partidaDao.getJugadoras(partida.getId()));
+        }
+
+        return lista;
     }
 
     @Override
@@ -26,8 +34,9 @@ public class PartidaRepositoryImpl implements PartidaRepository {
         Partida partida = partidaDao.getPartida(partidaId);
 
         if (partida != null) {
-            int juego_id = partida.getJuego().getId();
-            partida.setJuego(juegoDao.getJuego(juego_id));
+            int juegoId = partida.getJuego().getId();
+            partida.setJuego(juegoDao.getJuego(juegoId));
+            partida.setJugadoras(partidaDao.getJugadoras(partidaId));
         }
 
         return partida;
