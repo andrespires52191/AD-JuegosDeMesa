@@ -109,7 +109,7 @@ public class SociaDaoImpl implements SociaDao {
             ps.setString(2, socia.getNombre());
             ps.setString(3, socia.getApellidos());
             ps.setString(4, socia.getFechaNac());
-            ps.setString(5, socia.getApellidos());
+            ps.setString(5, socia.getTelefono());
             ps.setString(6, socia.getEmail());
 
             ps.setInt(7, socia.getId());
