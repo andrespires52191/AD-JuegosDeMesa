@@ -1,6 +1,7 @@
 package org.example.idao;
 
 import org.example.models.Partida;
+import org.example.models.Socia;
 
 import java.util.List;
 
@@ -17,7 +18,11 @@ public interface PartidaDao {
 
     List<String> getJugadoras(int partida_id);
 
-    boolean agregarJugadora(int partidaId, String jugadora);
+    boolean agregarJugadoraInvitada(int partidaId, String invitada);
 
-    boolean quitarJugadora(int partidaId, String jugadora);
+    boolean agregarJugadoraSocia(int partidaId, Socia socia);
+
+    boolean quitarJugadoraInvitada(int partidaId, String invitada);
+
+    boolean quitarJugadoraSocia(int partidaId, Socia socia);
 }

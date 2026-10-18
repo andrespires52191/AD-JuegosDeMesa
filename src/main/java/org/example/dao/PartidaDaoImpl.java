@@ -3,6 +3,7 @@ package org.example.dao;
 import org.example.idao.PartidaDao;
 import org.example.models.Juego;
 import org.example.models.Partida;
+import org.example.models.Socia;
 import org.example.utils.DatabaseConnection;
 
 import java.sql.PreparedStatement;
@@ -158,7 +159,7 @@ public class PartidaDaoImpl implements PartidaDao {
     public List<String> getJugadoras(int partida_id) {
         List<String> lista = new ArrayList<>();
 
-        String query = "select jugadora from partidas_jugadoras where partida_id=?";
+        String query = "select jugadora_id, nombre_invitada from partidas_jugadoras where partida_id=?";
         PreparedStatement ps = null;
         try {
             ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
@@ -166,7 +167,13 @@ public class PartidaDaoImpl implements PartidaDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String jugadora = rs.getString(1);
+                String jugadora;
+                int jugadora_id = rs.getInt("jugadora_id");
+                if (jugadora_id > 0) {
+                    jugadora = "Socia #" + jugadora_id;
+                } else {
+                    jugadora = rs.getString("nombre_invitada");
+                }
                 lista.add(jugadora);
             }
         } catch (SQLException e) {
@@ -176,15 +183,15 @@ public class PartidaDaoImpl implements PartidaDao {
     }
 
     @Override
-    public boolean agregarJugadora(int partidaId, String jugadora) {
-        String query = "insert into partidas_jugadoras (partida_id, jugadora) values (?, ?)";
+    public boolean agregarJugadoraInvitada(int partidaId, String invitada) {
+        String query = "insert into partidas_jugadoras (partida_id, nombre_invitada) values (?, ?)";
         PreparedStatement ps;
         int rs = 0;
         try {
             ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
 
             ps.setInt(1, partidaId);
-            ps.setString(2, jugadora);
+            ps.setString(2, invitada);
 
             rs = ps.executeUpdate();
         } catch (SQLException e) {
@@ -194,15 +201,51 @@ public class PartidaDaoImpl implements PartidaDao {
     }
 
     @Override
-    public boolean quitarJugadora(int partidaId, String jugadora) {
-        String query = "delete from partidas_jugadoras where partida_id=? and jugadora=?";
+    public boolean agregarJugadoraSocia(int partidaId, Socia socia) {
+        String query = "insert into partidas_jugadoras (partida_id, jugadora_id) values (?, ?)";
         PreparedStatement ps;
         int rs = 0;
         try {
             ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
 
             ps.setInt(1, partidaId);
-            ps.setString(2, jugadora);
+            ps.setInt(2, socia.getId());
+
+            rs = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (rs > 0);
+    }
+
+    @Override
+    public boolean quitarJugadoraInvitada(int partidaId, String invitada) {
+        String query = "delete from partidas_jugadoras where partida_id=? and nombre_invitada=?";
+        PreparedStatement ps;
+        int rs = 0;
+        try {
+            ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
+
+            ps.setInt(1, partidaId);
+            ps.setString(2, invitada);
+
+            rs = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (rs > 0);
+    }
+
+    @Override
+    public boolean quitarJugadoraSocia(int partidaId, Socia socia) {
+        String query = "delete from partidas_jugadoras where partida_id=? and jugadora_id=?";
+        PreparedStatement ps;
+        int rs = 0;
+        try {
+            ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
+
+            ps.setInt(1, partidaId);
+            ps.setInt(2, socia.getId());
 
             rs = ps.executeUpdate();
         } catch (SQLException e) {

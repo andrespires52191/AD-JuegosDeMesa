@@ -4,6 +4,7 @@ import org.example.dao.JuegoDaoImpl;
 import org.example.dao.PartidaDaoImpl;
 import org.example.irepositories.PartidaRepository;
 import org.example.models.Partida;
+import org.example.models.Socia;
 
 import java.util.List;
 
@@ -63,12 +64,22 @@ public class PartidaRepositoryImpl implements PartidaRepository {
     }
 
     @Override
-    public boolean agregarJugadora(int partidaId, String jugadora) {
-        return partidaDao.agregarJugadora(partidaId, jugadora);
+    public boolean agregarJugadoraInvitada(int partidaId, String invitada) {
+        return partidaDao.agregarJugadoraInvitada(partidaId, invitada);
     }
 
     @Override
-    public boolean quitarJugadora(int partidaId, String jugadora) {
-        return partidaDao.quitarJugadora(partidaId, jugadora);
+    public boolean agregarJugadoraSocia(int partidaId, Socia socia) {
+        return partidaDao.agregarJugadoraSocia(partidaId, socia);
+    }
+
+    @Override
+    public boolean quitarJugadoraInvitada(int partidaId, String invitada) {
+        return partidaDao.quitarJugadoraInvitada(partidaId, invitada);
+    }
+
+    @Override
+    public boolean quitarJugadoraSocia(int partidaId, Socia socia) {
+        return partidaDao.quitarJugadoraSocia(partidaId, socia);
     }
 }

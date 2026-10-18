@@ -80,6 +80,6 @@ public class Socia {
 
     @Override
     public String toString() {
-        return nombre + " " + apellidos;
+        return "#" + id + " - " + nombre + " " + apellidos;
     }
 }

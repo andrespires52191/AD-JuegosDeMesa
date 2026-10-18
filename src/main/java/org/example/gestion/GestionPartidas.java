@@ -2,8 +2,10 @@ package org.example.gestion;
 
 import org.example.models.Juego;
 import org.example.models.Partida;
+import org.example.models.Socia;
 import org.example.repositories.JuegoRepositoryImpl;
 import org.example.repositories.PartidaRepositoryImpl;
+import org.example.repositories.SociaRepositoryImpl;
 import org.example.utils.ExportadorJSON;
 import org.example.utils.ExportadorXML;
 import org.example.utils.SalidaDatos;
@@ -15,10 +17,12 @@ import static org.example.utils.EntradaDatos.preguntar;
 public class GestionPartidas {
     private final PartidaRepositoryImpl repoPartida;
     private final JuegoRepositoryImpl repoJuego;
+    private final SociaRepositoryImpl repoSocia;
 
-    public GestionPartidas(PartidaRepositoryImpl repoPartida, JuegoRepositoryImpl repoJuego) {
+    public GestionPartidas(PartidaRepositoryImpl repoPartida, JuegoRepositoryImpl repoJuego, SociaRepositoryImpl repoSocia) {
         this.repoPartida = repoPartida;
         this.repoJuego = repoJuego;
+        this.repoSocia = repoSocia;
 
         final String MENU = "1) Ver lista de Partidas"
                 + "\n2) Mostrar Partida"
@@ -123,7 +127,7 @@ public class GestionPartidas {
             if (juego == null) {
                 return null;
             }
-            
+
             partida = new Partida(juego, fecha, hora, plazasDeseadas);
         } catch (Exception ignored) {
         }
@@ -188,7 +192,7 @@ public class GestionPartidas {
     private void agregarJugadora() {
         int partida_id = 0;
         try {
-            partida_id = Integer.parseInt(preguntar("id: "));
+            partida_id = Integer.parseInt(preguntar("id de partida: "));
         } catch (NumberFormatException ignored) {
         }
 
@@ -203,8 +207,28 @@ public class GestionPartidas {
             return;
         }
 
-        String jugadora = preguntar("nombre de jugadora: ");
-        if (repoPartida.agregarJugadora(partida_id, jugadora)) {
+        String respuesta = preguntar("id de socia o nombre de invitada: ");
+
+        boolean resultado;
+        if (Character.isDigit(respuesta.charAt(0))) {
+            Socia jugadoraSocia = null;
+            try {
+                jugadoraSocia = repoSocia.getSocia(Integer.parseInt(respuesta));
+            } catch (NumberFormatException ignored) {
+            }
+
+            if (jugadoraSocia == null) {
+                System.out.println("Fallo al conseguir los datos");
+                return;
+            }
+
+            resultado = repoPartida.agregarJugadoraSocia(partida_id, jugadoraSocia);
+        } else {
+            String jugadoraInvitada = respuesta;
+            resultado = repoPartida.agregarJugadoraInvitada(partida_id, jugadoraInvitada);
+        }
+
+        if (resultado) {
             System.out.println("Acción terminada correctamente.");
         } else {
             System.out.println("Error al completar la acción.");
@@ -214,7 +238,7 @@ public class GestionPartidas {
     private void quitarJugadora() {
         int partida_id = 0;
         try {
-            partida_id = Integer.parseInt(preguntar("id: "));
+            partida_id = Integer.parseInt(preguntar("id de partida: "));
         } catch (NumberFormatException ignored) {
         }
 
@@ -223,8 +247,28 @@ public class GestionPartidas {
             return;
         }
 
-        String jugadora = preguntar("nombre de jugadora: ");
-        if (repoPartida.quitarJugadora(partida_id, jugadora)) {
+        String respuesta = preguntar("id de socia o nombre de invitada: ");
+
+        boolean resultado;
+        if (Character.isDigit(respuesta.charAt(0))) {
+            Socia jugadoraSocia = null;
+            try {
+                jugadoraSocia = repoSocia.getSocia(Integer.parseInt(respuesta));
+            } catch (NumberFormatException ignored) {
+            }
+
+            if (jugadoraSocia == null) {
+                System.out.println("Fallo al conseguir los datos");
+                return;
+            }
+
+            resultado = repoPartida.quitarJugadoraSocia(partida_id, jugadoraSocia);
+        } else {
+            String jugadoraInvitada = respuesta;
+            resultado = repoPartida.quitarJugadoraInvitada(partida_id, jugadoraInvitada);
+        }
+
+        if (resultado) {
             System.out.println("Acción terminada correctamente.");
         } else {
             System.out.println("Error al completar la acción.");

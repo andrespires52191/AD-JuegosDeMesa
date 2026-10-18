@@ -2,14 +2,17 @@ package org.example.repositories;
 
 import org.example.dao.JuegoDaoImpl;
 import org.example.dao.PartidaDaoImpl;
+import org.example.dao.SociaDaoImpl;
 import org.example.models.Juego;
 import org.example.models.JuegoEstado;
 import org.example.models.Partida;
+import org.example.models.Socia;
 import org.junit.jupiter.api.Test;
 
 class PartidaRepositoryImplTest {
     private PartidaRepositoryImpl partidaRepo = new PartidaRepositoryImpl(new PartidaDaoImpl(), new JuegoDaoImpl());
     private JuegoRepositoryImpl juegoRepo = new JuegoRepositoryImpl(new JuegoDaoImpl());
+    private SociaRepositoryImpl sociaRepo = new SociaRepositoryImpl(new SociaDaoImpl());
 
     @Test
     void testCombinado() {
@@ -83,14 +86,25 @@ class PartidaRepositoryImplTest {
         );
         assert partidaRepo.add(partida);
 
+        Socia socia = new Socia(
+                "dni",
+                "nombre",
+                "apellidos",
+                "1999-01-01",
+                "123456789",
+                "email");
+        assert sociaRepo.add(socia);
+
         // comprobar agregar
-        assert partidaRepo.agregarJugadora(partida.getId(), "jugadora1");
+        //assert partidaRepo.agregarJugadoraInvitada(partida.getId(), "jugadora1");
+        assert partidaRepo.agregarJugadoraSocia(partida.getId(), socia);
         assert partidaRepo.getJugadoras(partida.getId()).size() == 1;
-        assert partidaRepo.agregarJugadora(partida.getId(), "jugadora2");
+        assert partidaRepo.agregarJugadoraInvitada(partida.getId(), "jugadora2");
         assert partidaRepo.getJugadoras(partida.getId()).size() == 2;
 
         // comprobar quitar
-        assert partidaRepo.quitarJugadora(partida.getId(), "jugadora1");
+        //assert partidaRepo.quitarJugadoraInvitada(partida.getId(), "jugadora1");
+        assert partidaRepo.quitarJugadoraSocia(partida.getId(), socia);
         assert partidaRepo.getJugadoras(partida.getId()).size() == 1;
         assert partidaRepo.getJugadoras(partida.getId()).get(0).equals("jugadora2");
 
@@ -100,5 +114,6 @@ class PartidaRepositoryImplTest {
 
         // limpiar
         assert juegoRepo.delete(juego.getId());
+        assert sociaRepo.delete(socia.getId());
     }
 }

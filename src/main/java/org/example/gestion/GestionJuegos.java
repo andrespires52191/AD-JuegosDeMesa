@@ -79,7 +79,7 @@ public class GestionJuegos {
             double estimacionMinutos = Double.parseDouble(preguntar("estimacionMinutos: "));
             String tematica = preguntar("tematica: ");
             String ubicacion = preguntar("ubicacion: ");
-            JuegoEstado estado = JuegoEstado.valueOf(preguntar("estado: "));
+            JuegoEstado estado = JuegoEstado.valueOf(preguntar("estado: ").toUpperCase());
             String propietaria_str = preguntar("propietaria_id: ");
             String fechaAlta = preguntar("fechaAlta: ");
 
