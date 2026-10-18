@@ -276,10 +276,18 @@ public class GestionPartidas {
     }
 
     private void exportarXML() {
-        ExportadorXML.exportar("partidas.xml", repoPartida.getPartidas(), Partida.class);
+        if (ExportadorXML.exportar("partidas.xml", repoPartida.getPartidas(), Partida.class)) {
+            System.out.println("Exportado con éxito.");
+        } else {
+            System.out.println("Fallo al exportar.");
+        }
     }
 
     private void exportarJSON() {
-        ExportadorJSON.exportar("partidas.json", repoPartida.getPartidas());
+        if (ExportadorJSON.exportar("partidas.json", repoPartida.getPartidas())) {
+            System.out.println("Exportado con éxito.");
+        } else {
+            System.out.println("Fallo al exportar.");
+        }
     }
 }

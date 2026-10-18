@@ -172,10 +172,18 @@ public class GestionJuegos {
     }
 
     private void exportarXML() {
-        ExportadorXML.exportar("juegos.xml", repoJuego.getJuegos(), Juego.class);
+        if (ExportadorXML.exportar("juegos.xml", repoJuego.getJuegos(), Juego.class)) {
+            System.out.println("Exportado con éxito.");
+        } else {
+            System.out.println("Fallo al exportar.");
+        }
     }
 
     private void exportarJSON() {
-        ExportadorJSON.exportar("juegos.json", repoJuego.getJuegos());
+        if (ExportadorJSON.exportar("juegos.json", repoJuego.getJuegos())) {
+            System.out.println("Exportado con éxito.");
+        } else {
+            System.out.println("Fallo al exportar.");
+        }
     }
 }

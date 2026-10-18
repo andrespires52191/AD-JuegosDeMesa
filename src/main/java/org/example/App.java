@@ -48,7 +48,7 @@ public class App {
                 + "\n2) Gestionar los Juegos"
                 + "\n3) Gestionar las Socias"
                 + "\n4) Gestionar las Partidas"
-                + "\n5) Consultar los Metadatos"
+                + "\n5) Gestionar los Metadatos"
                 + "\n6) Salir";
 
         int accion = -1;
@@ -70,10 +70,10 @@ public class App {
                     new GestionSocias(repoSocia);
                     break;
                 case 4:
-                    new GestionPartidas(repoPartida, repoJuego);
+                    new GestionPartidas(repoPartida, repoJuego, repoSocia);
                     break;
                 case 5:
-                    new ConsultarMetadatos();
+                    new GestionMetadatos();
                     break;
                 case 6:
                     System.out.println("Saliendo...");

@@ -138,10 +138,18 @@ public class GestionSocias {
     }
 
     private void exportarXML() {
-        ExportadorXML.exportar("socias.xml", repoSocia.getSocias(), Socia.class);
+        if (ExportadorXML.exportar("socias.xml", repoSocia.getSocias(), Socia.class)) {
+            System.out.println("Exportado con éxito.");
+        } else {
+            System.out.println("Fallo al exportar.");
+        }
     }
 
     private void exportarJSON() {
-        ExportadorJSON.exportar("socias.json", repoSocia.getSocias());
+        if (ExportadorJSON.exportar("socias.json", repoSocia.getSocias())) {
+            System.out.println("Exportado con éxito.");
+        } else {
+            System.out.println("Fallo al exportar.");
+        }
     }
 }

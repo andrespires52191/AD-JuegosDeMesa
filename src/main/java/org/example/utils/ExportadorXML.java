@@ -3,6 +3,7 @@ package org.example.utils;
 import com.thoughtworks.xstream.XStream;
 import org.example.models.Listado;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class ExportadorXML {
     static XStream xstream = new XStream();
 
-    static public <T> void exportar(String filename, List<T> elementos, Class<T> claseT) {
+    static public <T> boolean exportar(String filename, List<T> elementos, Class<T> claseT) {
         try {
             // cambiar de nombre a las etiquetas XML
             xstream.alias("lista", Listado.class);
@@ -19,15 +20,22 @@ public class ExportadorXML {
             // colección por defecto
             xstream.addImplicitCollection(Listado.class, "lista");
 
-            // guardar
-            xstream.toXML(elementos, new FileOutputStream(filename));
+            // asegurarse de que existe carpeta de salida
+            File carpeta = new File("datos_exportados");
+            carpeta.mkdirs();
+            if (!carpeta.exists()) {
+                System.out.println("Error: fallo al crear carpeta de salida");
+                return false;
+            }
 
-            System.out.println("Exportado con éxito.");
-            return;
+            // guardar
+            xstream.toXML(elementos, new FileOutputStream(new File(carpeta, filename)));
+
+            return true;
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
 
-        System.out.println("Fallo al exportar.");
+        return false;
     }
 }
