@@ -13,9 +13,7 @@ public class DatabaseConnection {
             String driver = "org.mariadb.jdbc.Driver";
             //String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
-            //String url = "jdbc:mariadb://localhost:33060/juegos_de_mesa";
-            //String url = "jdbc:mysql://localhost/juegos_de_mesa";
-            String url = "jdbc:mariadb://localhost/juegos_de_mesa";
+            String url = "jdbc:mariadb://localhost:3306/juegos_de_mesa";
             String user = "root";
             String password = ""; // "12345Abcde";
 

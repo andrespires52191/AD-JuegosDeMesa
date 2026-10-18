@@ -27,7 +27,7 @@ public class AsociacionDaoImpl implements AsociacionDao {
                         rs.getString("fecha_apertura"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
         return asociacion;
     }

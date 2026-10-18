@@ -9,10 +9,20 @@ import org.example.models.Asociacion;
 import org.example.repositories.JuegoRepositoryImpl;
 import org.example.repositories.PartidaRepositoryImpl;
 import org.example.repositories.SociaRepositoryImpl;
+import org.example.utils.DatabaseConnection;
 import org.example.utils.EntradaDatos;
+
+import java.sql.SQLException;
 
 public class App {
     public static void main(String[] args) {
+        try {
+            DatabaseConnection.getInstance();
+        } catch (SQLException e) {
+            System.out.println("Error al acceder a la base de datos.");
+            return;
+        }
+
         mostrarMenuPrincipal();
     }
 

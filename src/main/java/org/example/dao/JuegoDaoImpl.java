@@ -132,6 +132,8 @@ public class JuegoDaoImpl implements JuegoDao {
             // Para recuperar el id se usa Statement.RETURN_GENERATED_KEYS. Más información abajo.
             ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
+            Socia propietaria = juego.getPropietaria();
+
             ps.setString(1, juego.getNombre());
             ps.setString(2, juego.getAutores());
             ps.setInt(3, juego.getMinJugadores());
@@ -140,7 +142,11 @@ public class JuegoDaoImpl implements JuegoDao {
             ps.setString(6, juego.getTematica());
             ps.setString(7, juego.getUbicacion());
             ps.setString(8, juego.getEstado().toString());
-            ps.setInt(9, juego.getPropietaria().getId());
+            if (propietaria == null) {
+                ps.setNull(9, java.sql.Types.INTEGER);
+            } else {
+                ps.setInt(9, propietaria.getId());
+            }
             ps.setString(10, juego.getFechaAlta());
 
             rs = ps.executeUpdate();
@@ -169,6 +175,8 @@ public class JuegoDaoImpl implements JuegoDao {
         try {
             ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
 
+            Socia propietaria = juego.getPropietaria();
+
             ps.setString(1, juego.getNombre());
             ps.setString(2, juego.getAutores());
             ps.setInt(3, juego.getMinJugadores());
@@ -177,7 +185,11 @@ public class JuegoDaoImpl implements JuegoDao {
             ps.setString(6, juego.getTematica());
             ps.setString(7, juego.getUbicacion());
             ps.setString(8, juego.getEstado().toString());
-            ps.setInt(9, juego.getPropietaria().getId());
+            if (propietaria == null) {
+                ps.setNull(9, java.sql.Types.INTEGER);
+            } else {
+                ps.setInt(9, propietaria.getId());
+            }
             ps.setString(10, juego.getFechaAlta());
 
             ps.setInt(11, juego.getId());
