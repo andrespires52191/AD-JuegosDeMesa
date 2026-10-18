@@ -24,7 +24,7 @@ class PartidaRepositoryImplTest {
                 JuegoEstado.DISPONIBLE,
                 null,
                 "2026-10-01");
-        juegoRepo.add(juego);
+        assert juegoRepo.add(juego);
         assert juego.getId() > 0;
 
         Partida partida = new Partida(
@@ -55,6 +55,48 @@ class PartidaRepositoryImplTest {
         // volver comprobar borrado
         partida = partidaRepo.getPartida(partida.getId());
         assert partida == null;
+
+        // limpiar
+        assert juegoRepo.delete(juego.getId());
+    }
+
+    @Test
+    void testPartidaJugadoras() {
+        Juego juego = new Juego(
+                "nombre",
+                "autor1, autor2",
+                1,
+                3,
+                10.0,
+                "tematica",
+                "ubicacion",
+                JuegoEstado.DISPONIBLE,
+                null,
+                "2026-10-01");
+        assert juegoRepo.add(juego);
+
+        Partida partida = new Partida(
+                juego,
+                "2026-10-02",
+                "12:00",
+                5
+        );
+        assert partidaRepo.add(partida);
+
+        // comprobar agregar
+        assert partidaRepo.agregarJugadora(partida.getId(), "jugadora1");
+        assert partidaRepo.getJugadoras(partida.getId()).size() == 1;
+        assert partidaRepo.agregarJugadora(partida.getId(), "jugadora2");
+        assert partidaRepo.getJugadoras(partida.getId()).size() == 2;
+
+        // comprobar quitar
+        assert partidaRepo.quitarJugadora(partida.getId(), "jugadora1");
+        assert partidaRepo.getJugadoras(partida.getId()).size() == 1;
+        assert partidaRepo.getJugadoras(partida.getId()).get(0).equals("jugadora2");
+
+        // comprobar borrado
+        assert partidaRepo.delete(partida.getId());
+        assert partidaRepo.getJugadoras(partida.getId()).isEmpty();
 
         // limpiar
         assert juegoRepo.delete(juego.getId());
