@@ -1,6 +1,7 @@
 package org.example.idao;
 
 import org.example.models.Juego;
+import org.example.models.Socia;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface JuegoDao {
     boolean update(Juego juego);
 
     boolean delete(int juego_id);
+
+    List<Juego> juegosDeSocia(Socia socia);
 }

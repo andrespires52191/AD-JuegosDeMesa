@@ -3,6 +3,7 @@ package org.example.repositories;
 import org.example.dao.JuegoDaoImpl;
 import org.example.irepositories.JuegoRepository;
 import org.example.models.Juego;
+import org.example.models.Socia;
 
 import java.util.List;
 
@@ -36,5 +37,10 @@ public class JuegoRepositoryImpl implements JuegoRepository {
     @Override
     public boolean delete(int juegoId) {
         return juegoDao.delete(juegoId);
+    }
+
+    @Override
+    public List<Juego> juegosDeSocia(Socia socia) {
+        return juegoDao.juegosDeSocia(socia);
     }
 }

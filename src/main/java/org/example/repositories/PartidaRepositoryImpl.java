@@ -82,4 +82,17 @@ public class PartidaRepositoryImpl implements PartidaRepository {
     public boolean quitarJugadoraSocia(int partidaId, Socia socia) {
         return partidaDao.quitarJugadoraSocia(partidaId, socia);
     }
+
+    @Override
+    public List<Partida> partidasDeSocia(Socia socia) {
+        List<Partida> lista = partidaDao.partidasDeSocia(socia);
+        
+        for (Partida partida : lista) {
+            int juegoId = partida.getJuego().getId();
+            partida.setJuego(juegoDao.getJuego(juegoId));
+            partida.setJugadoras(partidaDao.getJugadoras(partida.getId()));
+        }
+
+        return lista;
+    }
 }

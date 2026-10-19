@@ -67,7 +67,7 @@ public class App {
                     new GestionJuegos(repoJuego, repoSocia);
                     break;
                 case 3:
-                    new GestionSocias(repoSocia);
+                    new GestionSocias(repoSocia, repoJuego, repoPartida);
                     break;
                 case 4:
                     new GestionPartidas(repoPartida, repoJuego, repoSocia);

@@ -25,4 +25,6 @@ public interface PartidaRepository {
     boolean quitarJugadoraInvitada(int partidaId, String invitada);
 
     boolean quitarJugadoraSocia(int partidaId, Socia socia);
+
+    List<Partida> partidasDeSocia(Socia socia);
 }

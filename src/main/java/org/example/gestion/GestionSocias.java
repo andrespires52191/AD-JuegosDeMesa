@@ -1,7 +1,10 @@
 package org.example.gestion;
 
 import org.example.models.Socia;
+import org.example.repositories.JuegoRepositoryImpl;
+import org.example.repositories.PartidaRepositoryImpl;
 import org.example.repositories.SociaRepositoryImpl;
+import org.example.utils.EntradaDatos;
 import org.example.utils.ExportadorJSON;
 import org.example.utils.ExportadorXML;
 import org.example.utils.SalidaDatos;
@@ -10,21 +13,26 @@ import static org.example.utils.EntradaDatos.preguntar;
 
 public class GestionSocias {
     private final SociaRepositoryImpl repoSocia;
+    private final JuegoRepositoryImpl repoJuego;
+    private final PartidaRepositoryImpl repoPartida;
 
-    public GestionSocias(SociaRepositoryImpl repoSocia) {
-
+    public GestionSocias(SociaRepositoryImpl repoSocia, JuegoRepositoryImpl repoJuego, PartidaRepositoryImpl repoPartida) {
         this.repoSocia = repoSocia;
+        this.repoJuego = repoJuego;
+        this.repoPartida = repoPartida;
 
         final String MENU = "1) Ver lista de Socias"
                 + "\n2) Crear Socia"
                 + "\n3) Editar Socia"
                 + "\n4) Borrar Socia"
-                + "\n5) Exportar socias.xml"
-                + "\n6) Exportar socias.json"
-                + "\n7) Volver al menú principal";
+                + "\n5) Consultar Juegos pertenecientes a Socia"
+                + "\n6) Consultar Partidas jugadas por Socia"
+                + "\n7) Exportar socias.xml"
+                + "\n8) Exportar socias.json"
+                + "\n9) Volver al menú principal";
 
         int accion = -1;
-        while (accion != 7) {
+        while (accion != 9) {
             try {
                 accion = Integer.parseInt(preguntar("Elija una opción:\n" + MENU + "\n\nAcción: "));
             } catch (NumberFormatException e) {
@@ -45,12 +53,18 @@ public class GestionSocias {
                     borrar();
                     break;
                 case 5:
-                    exportarXML();
+                    consultarJuegos();
                     break;
                 case 6:
-                    exportarJSON();
+                    consultarPartidas();
                     break;
                 case 7:
+                    exportarXML();
+                    break;
+                case 8:
+                    exportarJSON();
+                    break;
+                case 9:
                     // condición de fin de bucle
                     break;
                 default:
@@ -95,7 +109,14 @@ public class GestionSocias {
     }
 
     private void editar() {
-        int socia_id = Integer.parseInt(preguntar("id: "));
+        int socia_id = 0;
+        try {
+            socia_id = Integer.parseInt(EntradaDatos.preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
         Socia socia = repoSocia.getSocia(socia_id);
         if (socia == null) {
             System.out.println("Socia no existe.");
@@ -123,7 +144,14 @@ public class GestionSocias {
     }
 
     private void borrar() {
-        int socia_id = Integer.parseInt(preguntar("id: "));
+        int socia_id = 0;
+        try {
+            socia_id = Integer.parseInt(EntradaDatos.preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
         Socia socia = repoSocia.getSocia(socia_id);
         if (socia == null) {
             System.out.println("Socia no existe.");
@@ -135,6 +163,44 @@ public class GestionSocias {
         } else {
             System.out.println("Error al completar la acción.");
         }
+    }
+
+    private void consultarJuegos() {
+
+        int socia_id = 0;
+        try {
+            socia_id = Integer.parseInt(EntradaDatos.preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
+        Socia socia = repoSocia.getSocia(socia_id);
+        if (socia == null) {
+            System.out.println("Socia no existe.");
+            return;
+        }
+
+        SalidaDatos.mostrarLista(repoJuego.juegosDeSocia(socia));
+    }
+
+    private void consultarPartidas() {
+
+        int socia_id = 0;
+        try {
+            socia_id = Integer.parseInt(EntradaDatos.preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
+        Socia socia = repoSocia.getSocia(socia_id);
+        if (socia == null) {
+            System.out.println("Socia no existe.");
+            return;
+        }
+
+        SalidaDatos.mostrarLista(repoPartida.partidasDeSocia(socia));
     }
 
     private void exportarXML() {

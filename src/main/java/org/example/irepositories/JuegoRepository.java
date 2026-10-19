@@ -1,6 +1,7 @@
 package org.example.irepositories;
 
 import org.example.models.Juego;
+import org.example.models.Socia;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface JuegoRepository {
     boolean update(Juego juego);
 
     boolean delete(int juegoId);
+
+    List<Juego> juegosDeSocia(Socia socia);
 }

@@ -149,7 +149,14 @@ public class GestionPartidas {
     }
 
     private void editar() {
-        int partida_id = Integer.parseInt(preguntar("id: "));
+        int partida_id = 0;
+        try {
+            partida_id = Integer.parseInt(preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
         Partida partida = repoPartida.getPartida(partida_id);
         if (partida == null) {
             System.out.println("Partida no existe.");
@@ -175,7 +182,14 @@ public class GestionPartidas {
     }
 
     private void borrar() {
-        int partida_id = Integer.parseInt(preguntar("id: "));
+        int partida_id = 0;
+        try {
+            partida_id = Integer.parseInt(preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
+        }
+
         Partida partida = repoPartida.getPartida(partida_id);
         if (partida == null) {
             System.out.println("Partida no existe.");

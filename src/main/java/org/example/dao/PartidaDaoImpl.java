@@ -253,4 +253,40 @@ public class PartidaDaoImpl implements PartidaDao {
         }
         return (rs > 0);
     }
+
+    @Override
+    public List<Partida> partidasDeSocia(Socia socia) {
+        List<Partida> lista = new ArrayList<>();
+
+        String query = "select p.id, p.juego_id, p.fecha, p.hora, p.plazas_deseadas" +
+                " from partidas as p" +
+                " join ( select partida_id from partidas_jugadoras where jugadora_id = ? )" +
+                " as j" +
+                " on j.partida_id = p.id";
+
+        PreparedStatement ps = null;
+        try {
+            ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
+
+            ps.setInt(1, socia.getId());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Juego juego = new Juego(rs.getInt("juego_id"));
+
+                Partida partida = new Partida(
+                        juego,
+                        rs.getString("fecha"),
+                        rs.getString("hora"),
+                        rs.getInt("plazas_deseadas"));
+                partida.setId(rs.getInt("id"));
+
+                lista.add(partida);
+            }
+            return lista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

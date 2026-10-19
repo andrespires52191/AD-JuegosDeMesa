@@ -215,4 +215,45 @@ public class JuegoDaoImpl implements JuegoDao {
         }
         return (rs > 0);
     }
+
+    @Override
+    public List<Juego> juegosDeSocia(Socia socia) {
+        List<Juego> lista = new ArrayList<>();
+
+        String query = "select" +
+                " id, nombre, autores, min_jugadores, max_jugadores, estimacion_minutos," +
+                " tematica, ubicacion, estado, propietaria_id, fecha_alta" +
+                " from juegos" +
+                " where propietaria_id = ?";
+
+        PreparedStatement ps = null;
+        try {
+            ps = DatabaseConnection.getInstance().getConnection().prepareStatement(query);
+
+            ps.setInt(1, socia.getId());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Juego juego = new Juego(
+                        rs.getString("nombre"),
+                        rs.getString("autores"),
+                        rs.getInt("min_jugadores"),
+                        rs.getInt("max_jugadores"),
+                        rs.getDouble("estimacion_minutos"),
+                        rs.getString("tematica"),
+                        rs.getString("ubicacion"),
+                        JuegoEstado.valueOf(rs.getString("estado")),
+                        socia,
+                        rs.getString("fecha_alta")
+                );
+
+                juego.setId(rs.getInt("id"));
+
+                lista.add(juego);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }
