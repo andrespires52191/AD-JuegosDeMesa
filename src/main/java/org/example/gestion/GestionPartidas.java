@@ -169,6 +169,12 @@ public class GestionPartidas {
             return;
         }
 
+        int plazasOcupadas = repoPartida.getJugadoras(partida_id).size();
+        if (plazasOcupadas > partidaActualizada.getPlazasDeseadas()) {
+            System.out.println("Ya hay " + plazasOcupadas + " plazas ocupadas, quita jugadoras e intenta de nuevo.");
+            return;
+        }
+
         partida.setJuego(partidaActualizada.getJuego());
         partida.setFecha(partidaActualizada.getFecha());
         partida.setPlazasDeseadas(partidaActualizada.getPlazasDeseadas());
