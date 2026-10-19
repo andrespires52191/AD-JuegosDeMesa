@@ -208,6 +208,12 @@ public class GestionPartidas {
         }
 
         String respuesta = preguntar("id de socia o nombre de invitada: ");
+        if (respuesta.isEmpty()) {
+            System.out.println("El campo no puede estar vacío");
+            return;
+        }
+
+        List<String> jugadoras = repoPartida.getJugadoras(partida_id);
 
         boolean resultado;
         if (Character.isDigit(respuesta.charAt(0))) {
@@ -222,9 +228,20 @@ public class GestionPartidas {
                 return;
             }
 
+            if (jugadoras.contains("Socia #" + jugadoraSocia.getId())) {
+                System.out.println("La jugadora ya está en la lista");
+                return;
+            }
+
             resultado = repoPartida.agregarJugadoraSocia(partida_id, jugadoraSocia);
         } else {
             String jugadoraInvitada = respuesta;
+
+            if (jugadoras.contains(jugadoraInvitada)) {
+                System.out.println("La jugadora ya está en la lista");
+                return;
+            }
+
             resultado = repoPartida.agregarJugadoraInvitada(partida_id, jugadoraInvitada);
         }
 
@@ -248,6 +265,12 @@ public class GestionPartidas {
         }
 
         String respuesta = preguntar("id de socia o nombre de invitada: ");
+        if (respuesta.isEmpty()) {
+            System.out.println("El campo no puede estar vacío");
+            return;
+        }
+
+        List<String> jugadoras = repoPartida.getJugadoras(partida_id);
 
         boolean resultado;
         if (Character.isDigit(respuesta.charAt(0))) {
@@ -262,9 +285,20 @@ public class GestionPartidas {
                 return;
             }
 
+            if (!jugadoras.contains("Socia #" + jugadoraSocia.getId())) {
+                System.out.println("La jugadora no está en la lista");
+                return;
+            }
+
             resultado = repoPartida.quitarJugadoraSocia(partida_id, jugadoraSocia);
         } else {
             String jugadoraInvitada = respuesta;
+
+            if (!jugadoras.contains(jugadoraInvitada)) {
+                System.out.println("La jugadora no está en la lista");
+                return;
+            }
+
             resultado = repoPartida.quitarJugadoraInvitada(partida_id, jugadoraInvitada);
         }
 
