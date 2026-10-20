@@ -118,17 +118,14 @@ public class GestionPartidas {
     private Partida peidrDatos() {
         Partida partida = null;
         try {
-            String juego_str = preguntar("juego_id: ");
+            int juego_id = Integer.parseInt(preguntar("juego_id: "));
             LocalDate fecha = LocalDate.parse(preguntar("fecha: "));
             int plazasDeseadas = Integer.parseInt(preguntar("plazasDeseadas: "));
             LocalTime hora = LocalTime.parse(preguntar("hora: "));
 
-            int juego_id = juego_str.isEmpty() ? 0 : Integer.parseInt(juego_str);
-            Juego juego = null;
-            if (juego_id > 0) {
-                juego = repoJuego.getJuego(juego_id);
-            }
+            Juego juego = repoJuego.getJuego(juego_id);
             if (juego == null) {
+                System.out.println("Juego no existe");
                 return null;
             }
 
@@ -218,6 +215,8 @@ public class GestionPartidas {
         try {
             partida_id = Integer.parseInt(preguntar("id de partida: "));
         } catch (NumberFormatException ignored) {
+            System.out.println("Fallo al leer datos");
+            return;
         }
 
         Partida partida = repoPartida.getPartida(partida_id);
@@ -281,6 +280,8 @@ public class GestionPartidas {
         try {
             partida_id = Integer.parseInt(preguntar("id de partida: "));
         } catch (NumberFormatException ignored) {
+            System.out.println("Fallo al leer datos");
+            return;
         }
 
         if (partida_id == 0) {
