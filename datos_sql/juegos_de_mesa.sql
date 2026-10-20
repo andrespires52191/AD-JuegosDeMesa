@@ -73,7 +73,8 @@ CREATE TABLE `juegos`
 
 INSERT INTO `juegos` (`id`, `nombre`, `autores`, `min_jugadores`, `max_jugadores`, `estimacion_minutos`, `tematica`,
                       `ubicacion`, `estado`, `propietaria_id`, `fecha_alta`)
-VALUES (94, 'juego1', 'autor1', 1, 3, 10, 'tematica', 'ubicacion', 'DISPONIBLE', 66, '2026-01-01');
+VALUES (1, 'juego1', 'autor1', 1, 3, 10, 'tematica1', 'ubicacion1', 'DISPONIBLE', 1, '2026-01-01'),
+       (2, 'juego2', 'autor2 y autor3', 1, 5, 15, 'tematica2', 'ubicacio2', 'DISPONIBLE', 1, '2026-02-02');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,8 @@ CREATE TABLE `partidas`
 --
 
 INSERT INTO `partidas` (`id`, `juego_id`, `fecha`, `hora`, `plazas_deseadas`)
-VALUES (66, 94, '2026-01-01', '12:00:00', 3);
+VALUES (1, 1, '2026-01-01', '12:00:00', 3),
+       (2, 2, '2026-02-02', '14:00:00', 5);
 
 -- --------------------------------------------------------
 
@@ -116,8 +118,10 @@ CREATE TABLE `partidas_jugadoras`
 --
 
 INSERT INTO `partidas_jugadoras` (`id`, `partida_id`, `jugadora_id`, `nombre_invitada`)
-VALUES (34, 66, NULL, 'invitada'),
-       (36, 66, 66, NULL);
+VALUES (1, 1, NULL, 'invitada1'),
+       (2, 1, 1, NULL),
+       (3, 2, NULL, 'invitada2'),
+       (4, 2, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -141,7 +145,8 @@ CREATE TABLE `socias`
 --
 
 INSERT INTO `socias` (`id`, `dni`, `nombre`, `apellidos`, `fecha_nac`, `telefono`, `email`)
-VALUES (66, 'dni1', 'nombre1', 'apellidos1', '2000-01-01', '123456789', 'email');
+VALUES (1, 'dni1', 'nombre1', 'apellidos1', '2001-01-01', '111111111', 'email1'),
+       (2, 'dni2', 'nombre2', 'apellidos2', '2002-02-02', '222222222', 'email2');
 
 --
 -- Indexes for dumped tables
@@ -195,25 +200,25 @@ ALTER TABLE `asociacion`
 -- AUTO_INCREMENT for table `juegos`
 --
 ALTER TABLE `juegos`
-    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `partidas`
 --
 ALTER TABLE `partidas`
-    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `partidas_jugadoras`
 --
 ALTER TABLE `partidas_jugadoras`
-    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `socias`
 --
 ALTER TABLE `socias`
-    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+    MODIFY `id` int (11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
