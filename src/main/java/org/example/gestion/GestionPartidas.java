@@ -27,7 +27,7 @@ public class GestionPartidas {
         this.repoSocia = repoSocia;
 
         final String MENU = "1) Ver lista de Partidas"
-                + "\n2) Mostrar Partida"
+                + "\n2) Mostrar detalles de Partida"
                 + "\n3) Crear Partida"
                 + "\n4) Editar Partida"
                 + "\n5) Borrar Partida"
@@ -88,15 +88,17 @@ public class GestionPartidas {
     }
 
     private void mostrar() {
-        Partida partida = null;
+        int partida_id = 0;
         try {
-            int partida_id = Integer.parseInt(preguntar("id: "));
-            partida = repoPartida.getPartida(partida_id);
-        } catch (NumberFormatException ignored) {
+            partida_id = Integer.parseInt(preguntar("id: "));
+        } catch (NumberFormatException e) {
+            System.out.println("Fallo al leer datos");
+            return;
         }
 
+        Partida partida = repoPartida.getPartida(partida_id);
         if (partida == null) {
-            System.out.println("Fallo al conseguir los datos");
+            System.out.println("Partida no existe.");
             return;
         }
 
