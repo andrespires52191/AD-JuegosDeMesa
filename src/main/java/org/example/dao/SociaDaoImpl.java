@@ -27,7 +27,7 @@ public class SociaDaoImpl implements SociaDao {
                         rs.getString("dni"),
                         rs.getString("nombre"),
                         rs.getString("apellidos"),
-                        rs.getString("fecha_nac"),
+                        rs.getDate("fecha_nac").toLocalDate(),
                         rs.getString("telefono"),
                         rs.getString("email"));
                 socia.setId(rs.getInt("id"));
@@ -55,7 +55,7 @@ public class SociaDaoImpl implements SociaDao {
                         rs.getString("dni"),
                         rs.getString("nombre"),
                         rs.getString("apellidos"),
-                        rs.getString("fecha_nac"),
+                        rs.getDate("fecha_nac").toLocalDate(),
                         rs.getString("telefono"),
                         rs.getString("email"));
                 socia.setId(socia_id);
@@ -78,7 +78,7 @@ public class SociaDaoImpl implements SociaDao {
             ps.setString(1, socia.getDni());
             ps.setString(2, socia.getNombre());
             ps.setString(3, socia.getApellidos());
-            ps.setString(4, socia.getFechaNac());
+            ps.setDate(4, java.sql.Date.valueOf(socia.getFechaNac()));
             ps.setString(5, socia.getTelefono());
             ps.setString(6, socia.getEmail());
 
@@ -108,7 +108,7 @@ public class SociaDaoImpl implements SociaDao {
             ps.setString(1, socia.getDni());
             ps.setString(2, socia.getNombre());
             ps.setString(3, socia.getApellidos());
-            ps.setString(4, socia.getFechaNac());
+            ps.setDate(4, java.sql.Date.valueOf(socia.getFechaNac()));
             ps.setString(5, socia.getTelefono());
             ps.setString(6, socia.getEmail());
 

@@ -9,6 +9,9 @@ import org.example.models.Partida;
 import org.example.models.Socia;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 class PartidaRepositoryImplTest {
     private PartidaRepositoryImpl partidaRepo = new PartidaRepositoryImpl(new PartidaDaoImpl(), new JuegoDaoImpl());
     private JuegoRepositoryImpl juegoRepo = new JuegoRepositoryImpl(new JuegoDaoImpl());
@@ -26,14 +29,14 @@ class PartidaRepositoryImplTest {
                 "ubicacion",
                 JuegoEstado.DISPONIBLE,
                 null,
-                "2026-10-01");
+                LocalDate.parse("2026-10-01"));
         assert juegoRepo.add(juego);
         assert juego.getId() > 0;
 
         Partida partida = new Partida(
                 juego,
-                "2026-10-02",
-                "12:00",
+                LocalDate.parse("2026-10-02"),
+                LocalTime.parse("12:00"),
                 5
         );
 
@@ -46,7 +49,7 @@ class PartidaRepositoryImplTest {
         assert partida != null;
 
         // comprobar actualizacion
-        String nuevaHora = "14:00";
+        LocalTime nuevaHora = LocalTime.parse("14:00");
         partida.setHora(nuevaHora);
         assert partidaRepo.update(partida);
         // volver a comprobar actualizacion
@@ -75,13 +78,13 @@ class PartidaRepositoryImplTest {
                 "ubicacion",
                 JuegoEstado.DISPONIBLE,
                 null,
-                "2026-10-01");
+                LocalDate.parse("2026-10-01"));
         assert juegoRepo.add(juego);
 
         Partida partida = new Partida(
                 juego,
-                "2026-10-02",
-                "12:00",
+                LocalDate.parse("2026-10-02"),
+                LocalTime.parse("12:00"),
                 5
         );
         assert partidaRepo.add(partida);
@@ -90,7 +93,7 @@ class PartidaRepositoryImplTest {
                 "dni",
                 "nombre",
                 "apellidos",
-                "1999-01-01",
+                LocalDate.parse("1999-01-01"),
                 "123456789",
                 "email");
         assert sociaRepo.add(socia);

@@ -1,5 +1,7 @@
 package org.example.models;
 
+import java.time.LocalDate;
+
 //Listado de juegos de mesa disponibles en la asociación, mostrando datos como el
 //número identificador del juego, el nombre, el autor o autores, el número mínimo y
 //máximo de jugadores, duración estimada, su temática, dónde se encuentra, estado
@@ -17,13 +19,13 @@ public class Juego {
     String ubicacion;
     JuegoEstado estado;
     Socia propietaria;
-    String fechaAlta;
+    LocalDate fechaAlta;
 
     public Juego(int id) {
         this.id = id;
     }
 
-    public Juego(String nombre, String autores, int minJugadores, int maxJugadores, double estimacionMinutos, String tematica, String ubicacion, JuegoEstado estado, Socia propietaria, String fechaAlta) {
+    public Juego(String nombre, String autores, int minJugadores, int maxJugadores, double estimacionMinutos, String tematica, String ubicacion, JuegoEstado estado, Socia propietaria, LocalDate fechaAlta) {
         this.nombre = nombre;
         this.autores = autores;
         this.minJugadores = minJugadores;
@@ -116,11 +118,11 @@ public class Juego {
         this.propietaria = propietaria;
     }
 
-    public String getFechaAlta() {
+    public LocalDate getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(String fechaAlta) {
+    public void setFechaAlta(LocalDate fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 

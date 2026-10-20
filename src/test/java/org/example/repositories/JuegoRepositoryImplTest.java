@@ -7,6 +7,8 @@ import org.example.models.JuegoEstado;
 import org.example.models.Socia;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 class JuegoRepositoryImplTest {
     private JuegoRepositoryImpl juegoRepo = new JuegoRepositoryImpl(new JuegoDaoImpl());
     private SociaRepositoryImpl sociaRepo = new SociaRepositoryImpl(new SociaDaoImpl());
@@ -17,7 +19,7 @@ class JuegoRepositoryImplTest {
                 "dni",
                 "nombre",
                 "apellidos",
-                "1999-01-01",
+                LocalDate.parse("1999-01-01"),
                 "123456789",
                 "email");
         sociaRepo.add(socia);
@@ -33,7 +35,7 @@ class JuegoRepositoryImplTest {
                 "ubicacion",
                 JuegoEstado.DISPONIBLE,
                 socia,
-                "2026-10-01");
+                LocalDate.parse("2026-10-01"));
 
         // comprobar creacion
         assert juegoRepo.add(juego);

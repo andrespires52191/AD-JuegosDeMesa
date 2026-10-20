@@ -39,7 +39,7 @@ public class JuegoDaoImpl implements JuegoDao {
                             rs.getString("s_dni"),
                             rs.getString("s_nombre"),
                             rs.getString("s_apellidos"),
-                            rs.getString("s_fecha_nac"),
+                            rs.getDate("s_fecha_nac").toLocalDate(),
                             rs.getString("s_telefono"),
                             rs.getString("s_email"));
                     propietaria.setId(propietaria_id);
@@ -55,7 +55,7 @@ public class JuegoDaoImpl implements JuegoDao {
                         rs.getString("ubicacion"),
                         JuegoEstado.valueOf(rs.getString("estado")),
                         propietaria,
-                        rs.getString("fecha_alta")
+                        rs.getDate("fecha_alta").toLocalDate()
                 );
 
                 juego.setId(rs.getInt("id"));
@@ -93,7 +93,7 @@ public class JuegoDaoImpl implements JuegoDao {
                             rs.getString("s_dni"),
                             rs.getString("s_nombre"),
                             rs.getString("s_apellidos"),
-                            rs.getString("s_fecha_nac"),
+                            rs.getDate("s_fecha_nac").toLocalDate(),
                             rs.getString("s_telefono"),
                             rs.getString("s_email"));
                     propietaria.setId(propietaria_id);
@@ -109,7 +109,7 @@ public class JuegoDaoImpl implements JuegoDao {
                         rs.getString("ubicacion"),
                         JuegoEstado.valueOf(rs.getString("estado")),
                         propietaria,
-                        rs.getString("fecha_alta")
+                        rs.getDate("fecha_alta").toLocalDate()
                 );
 
                 juego.setId(juego_id);
@@ -147,7 +147,7 @@ public class JuegoDaoImpl implements JuegoDao {
             } else {
                 ps.setInt(9, propietaria.getId());
             }
-            ps.setString(10, juego.getFechaAlta());
+            ps.setDate(10, java.sql.Date.valueOf(juego.getFechaAlta()));
 
             rs = ps.executeUpdate();
             if (rs > 0) {
@@ -190,7 +190,7 @@ public class JuegoDaoImpl implements JuegoDao {
             } else {
                 ps.setInt(9, propietaria.getId());
             }
-            ps.setString(10, juego.getFechaAlta());
+            ps.setDate(10, java.sql.Date.valueOf(juego.getFechaAlta()));
 
             ps.setInt(11, juego.getId());
 
@@ -244,7 +244,7 @@ public class JuegoDaoImpl implements JuegoDao {
                         rs.getString("ubicacion"),
                         JuegoEstado.valueOf(rs.getString("estado")),
                         socia,
-                        rs.getString("fecha_alta")
+                        rs.getDate("fecha_alta").toLocalDate()
                 );
 
                 juego.setId(rs.getInt("id"));

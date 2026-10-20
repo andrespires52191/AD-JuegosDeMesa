@@ -1,5 +1,7 @@
 package org.example.models;
 
+import java.time.LocalDate;
+
 //Listado de socias que forman parte de la asociación. De cada socia se debe registrar
 //el DNI/NIE/Pasaporte, el nombre, los apellidos, un teléfono de contacto, la edad y su
 //email. Además, por cada socia se debe poder consultar sus juegos y sus partidas.
@@ -9,11 +11,11 @@ public class Socia {
     String dni;
     String nombre;
     String apellidos;
-    String fechaNac;
+    LocalDate fechaNac;
     String telefono;
     String email;
 
-    public Socia(String dni, String nombre, String apellidos, String fechaNac, String telefono, String email) {
+    public Socia(String dni, String nombre, String apellidos, LocalDate fechaNac, String telefono, String email) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -54,11 +56,11 @@ public class Socia {
         this.apellidos = apellidos;
     }
 
-    public String getFechaNac() {
+    public LocalDate getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(String fechaNac) {
+    public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
     }
 

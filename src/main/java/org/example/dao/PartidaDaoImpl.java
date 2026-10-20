@@ -29,8 +29,8 @@ public class PartidaDaoImpl implements PartidaDao {
 
                 Partida partida = new Partida(
                         juego,
-                        rs.getString("fecha"),
-                        rs.getString("hora"),
+                        rs.getDate("fecha").toLocalDate(),
+                        rs.getTime("hora").toLocalTime(),
                         rs.getInt("plazas_deseadas"));
                 partida.setId(rs.getInt("id"));
 
@@ -57,8 +57,8 @@ public class PartidaDaoImpl implements PartidaDao {
             while (rs.next()) {
                 partida = new Partida(
                         new Juego(rs.getInt("juego_id")),
-                        rs.getString("fecha"),
-                        rs.getString("hora"),
+                        rs.getDate("fecha").toLocalDate(),
+                        rs.getTime("hora").toLocalTime(),
                         rs.getInt("plazas_deseadas"));
                 partida.setId(partida_id);
             }
@@ -85,8 +85,8 @@ public class PartidaDaoImpl implements PartidaDao {
             } else {
                 ps.setInt(1, juego.getId());
             }
-            ps.setString(2, partida.getFecha());
-            ps.setString(3, partida.getHora());
+            ps.setDate(2, java.sql.Date.valueOf(partida.getFecha()));
+            ps.setTime(3, java.sql.Time.valueOf(partida.getHora()));
             ps.setInt(4, partida.getPlazasDeseadas());
 
             rs = ps.executeUpdate();
@@ -125,8 +125,8 @@ public class PartidaDaoImpl implements PartidaDao {
             } else {
                 ps.setInt(1, juego.getId());
             }
-            ps.setString(2, partida.getFecha());
-            ps.setString(3, partida.getHora());
+            ps.setDate(2, java.sql.Date.valueOf(partida.getFecha()));
+            ps.setTime(3, java.sql.Time.valueOf(partida.getHora()));
             ps.setInt(4, partida.getPlazasDeseadas());
 
             ps.setInt(5, partida.getId());
@@ -276,8 +276,8 @@ public class PartidaDaoImpl implements PartidaDao {
 
                 Partida partida = new Partida(
                         juego,
-                        rs.getString("fecha"),
-                        rs.getString("hora"),
+                        rs.getDate("fecha").toLocalDate(),
+                        rs.getTime("hora").toLocalTime(),
                         rs.getInt("plazas_deseadas"));
                 partida.setId(rs.getInt("id"));
 

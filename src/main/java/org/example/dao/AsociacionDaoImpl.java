@@ -24,7 +24,7 @@ public class AsociacionDaoImpl implements AsociacionDao {
                         rs.getString("nombre"),
                         rs.getString("razon_social"),
                         rs.getString("direccion"),
-                        rs.getString("fecha_apertura"));
+                        rs.getDate("fecha_apertura").toLocalDate());
             }
         } catch (SQLException e) {
             // e.printStackTrace();
@@ -44,7 +44,7 @@ public class AsociacionDaoImpl implements AsociacionDao {
             ps.setString(2, asociacion.getNombre());
             ps.setString(3, asociacion.getRazonSocial());
             ps.setString(4, asociacion.getDireccion());
-            ps.setString(5, asociacion.getFechaApertura());
+            ps.setDate(5, java.sql.Date.valueOf(asociacion.getFechaApertura()));
 
             rs = ps.executeUpdate();
         } catch (SQLException e) {

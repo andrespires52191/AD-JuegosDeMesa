@@ -1,5 +1,7 @@
 package org.example.models;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 //Listado de partidas de la asociación. Cada partida tendrá asociadas una serie de
@@ -10,11 +12,11 @@ public class Partida {
     int id;
     List<String> jugadoras;
     Juego juego;
-    String fecha;
-    String hora;
+    LocalDate fecha;
+    LocalTime hora;
     int plazasDeseadas;
 
-    public Partida(Juego juego, String fecha, String hora, int plazasDeseadas) {
+    public Partida(Juego juego, LocalDate fecha, LocalTime hora, int plazasDeseadas) {
         this.juego = juego;
         this.fecha = fecha;
         this.hora = hora;
@@ -45,11 +47,11 @@ public class Partida {
         this.juego = juego;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -61,11 +63,11 @@ public class Partida {
         this.plazasDeseadas = plazasDeseadas;
     }
 
-    public String getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 

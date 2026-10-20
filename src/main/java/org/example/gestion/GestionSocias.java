@@ -9,6 +9,8 @@ import org.example.utils.ExportadorJSON;
 import org.example.utils.ExportadorXML;
 import org.example.utils.SalidaDatos;
 
+import java.time.LocalDate;
+
 import static org.example.utils.EntradaDatos.preguntar;
 
 public class GestionSocias {
@@ -84,7 +86,7 @@ public class GestionSocias {
             String dni = preguntar("dni: ");
             String nombre = preguntar("nombre: ");
             String apellidos = preguntar("apellidos: ");
-            String fechaNac = preguntar("fechaNac: ");
+            LocalDate fechaNac = LocalDate.parse(preguntar("fechaNac: "));
             String telefono = preguntar("telefono: ");
             String email = preguntar("email: ");
 

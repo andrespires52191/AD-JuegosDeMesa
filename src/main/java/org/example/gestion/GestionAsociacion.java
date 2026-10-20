@@ -3,6 +3,8 @@ package org.example.gestion;
 import org.example.dao.AsociacionDaoImpl;
 import org.example.models.Asociacion;
 
+import java.time.LocalDate;
+
 import static org.example.utils.EntradaDatos.preguntar;
 
 //visualización y modificación de los datos de la asociación (razón social, CIF,
@@ -58,7 +60,13 @@ public class GestionAsociacion {
         String nombre = preguntar("nombre: ");
         String razonSocial = preguntar("razonSocial: ");
         String direccion = preguntar("direccion: ");
-        String fechaApertura = preguntar("fechaApertura: ");
+        LocalDate fechaApertura;
+        try {
+            fechaApertura = LocalDate.parse(preguntar("fechaApertura: "));
+        } catch (Exception e) {
+            System.out.println("Fallo al leer los datos");
+            return;
+        }
 
         asociacion.setCif(cif);
         asociacion.setNombre(nombre);

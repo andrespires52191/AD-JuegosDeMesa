@@ -10,6 +10,8 @@ import org.example.utils.ExportadorJSON;
 import org.example.utils.ExportadorXML;
 import org.example.utils.SalidaDatos;
 
+import java.time.LocalDate;
+
 import static org.example.utils.EntradaDatos.preguntar;
 
 public class GestionJuegos {
@@ -81,7 +83,7 @@ public class GestionJuegos {
             String ubicacion = preguntar("ubicacion: ");
             JuegoEstado estado = JuegoEstado.valueOf(preguntar("estado: ").toUpperCase());
             String propietaria_str = preguntar("propietaria_id: ");
-            String fechaAlta = preguntar("fechaAlta: ");
+            LocalDate fechaAlta = LocalDate.parse(preguntar("fechaAlta: "));
 
             int propietaria_id = propietaria_str.isEmpty() ? 0 : Integer.parseInt(propietaria_str);
             Socia propietaria = null;

@@ -10,6 +10,8 @@ import org.example.utils.ExportadorJSON;
 import org.example.utils.ExportadorXML;
 import org.example.utils.SalidaDatos;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static org.example.utils.EntradaDatos.preguntar;
@@ -115,9 +117,9 @@ public class GestionPartidas {
         Partida partida = null;
         try {
             String juego_str = preguntar("juego_id: ");
-            String fecha = preguntar("fecha: ");
+            LocalDate fecha = LocalDate.parse(preguntar("fecha: "));
             int plazasDeseadas = Integer.parseInt(preguntar("plazasDeseadas: "));
-            String hora = preguntar("hora: ");
+            LocalTime hora = LocalTime.parse(preguntar("hora: "));
 
             int juego_id = juego_str.isEmpty() ? 0 : Integer.parseInt(juego_str);
             Juego juego = null;

@@ -1,5 +1,7 @@
 package org.example.models;
 
+import java.time.LocalDate;
+
 // con los datos más relevantes de la asociación
 // (por ejemplo nombre, fecha de apertura, dirección, CIF, ...)
 //Asociación (visualización y modificación de los datos de la asociación (razón social, CIF,
@@ -9,9 +11,9 @@ public class Asociacion {
     String nombre;
     String razonSocial;
     String direccion;
-    String fechaApertura;
+    LocalDate fechaApertura;
 
-    public Asociacion(String cif, String nombre, String razonSocial, String direccion, String fechaApertura) {
+    public Asociacion(String cif, String nombre, String razonSocial, String direccion, LocalDate fechaApertura) {
         this.cif = cif;
         this.nombre = nombre;
         this.razonSocial = razonSocial;
@@ -51,11 +53,11 @@ public class Asociacion {
         this.direccion = direccion;
     }
 
-    public String getFechaApertura() {
+    public LocalDate getFechaApertura() {
         return fechaApertura;
     }
 
-    public void setFechaApertura(String fechaApertura) {
+    public void setFechaApertura(LocalDate fechaApertura) {
         this.fechaApertura = fechaApertura;
     }
 

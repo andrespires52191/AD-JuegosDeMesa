@@ -4,6 +4,8 @@ import org.example.dao.SociaDaoImpl;
 import org.example.models.Socia;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 class SociaRepositoryImplTest {
     private SociaRepositoryImpl sociaRepo = new SociaRepositoryImpl(new SociaDaoImpl());
 
@@ -13,7 +15,7 @@ class SociaRepositoryImplTest {
                 "dni",
                 "nombre",
                 "apellidos",
-                "1999-01-01",
+                LocalDate.parse("1999-01-01"),
                 "123456789",
                 "email");
 
