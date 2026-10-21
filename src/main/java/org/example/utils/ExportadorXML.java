@@ -29,7 +29,9 @@ public class ExportadorXML {
             }
 
             // guardar
-            xstream.toXML(elementos, new FileOutputStream(new File(carpeta, filename)));
+            FileOutputStream fos = new FileOutputStream(new File(carpeta, filename));
+            xstream.toXML(elementos, fos);
+            fos.close();
 
             return true;
         } catch (IOException e) {
