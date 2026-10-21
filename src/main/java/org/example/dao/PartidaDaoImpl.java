@@ -36,11 +36,10 @@ public class PartidaDaoImpl implements PartidaDao {
 
                 lista.add(partida);
             }
-            return lista;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return lista;
     }
 
     @Override
@@ -79,8 +78,7 @@ public class PartidaDaoImpl implements PartidaDao {
 
             Juego juego = partida.getJuego();
             if (juego == null) {
-//                ps.setNull(1, java.sql.Types.INTEGER);
-//                System.out.println("juego null");
+                System.out.println("Referencia a juego incorrecta.");
                 return false;
             } else {
                 ps.setInt(1, juego.getId());
@@ -119,8 +117,7 @@ public class PartidaDaoImpl implements PartidaDao {
 
             Juego juego = partida.getJuego();
             if (juego == null) {
-//                ps.setNull(1, java.sql.Types.INTEGER);
-//                System.out.println("juego null");
+                System.out.println("Referencia a juego incorrecta.");
                 return false;
             } else {
                 ps.setInt(1, juego.getId());
@@ -283,10 +280,9 @@ public class PartidaDaoImpl implements PartidaDao {
 
                 lista.add(partida);
             }
-            return lista;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return lista;
     }
 }

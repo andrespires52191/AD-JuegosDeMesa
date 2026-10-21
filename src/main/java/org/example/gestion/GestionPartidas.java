@@ -129,6 +129,13 @@ public class GestionPartidas {
                 return null;
             }
 
+            int min = juego.getMinJugadores();
+            int max = juego.getMaxJugadores();
+            if (plazasDeseadas < min || plazasDeseadas > max) {
+                System.out.println("Las plazas deben estar entre " + min + " y " + max);
+                return null;
+            }
+
             partida = new Partida(juego, fecha, hora, plazasDeseadas);
         } catch (Exception ignored) {
         }
@@ -221,7 +228,7 @@ public class GestionPartidas {
 
         Partida partida = repoPartida.getPartida(partida_id);
         if (partida == null) {
-            System.out.println("Fallo al conseguir los datos");
+            System.out.println("Partida no existe.");
             return;
         }
 
@@ -284,8 +291,9 @@ public class GestionPartidas {
             return;
         }
 
-        if (partida_id == 0) {
-            System.out.println("Fallo al conseguir los datos");
+        Partida partida = repoPartida.getPartida(partida_id);
+        if (partida == null) {
+            System.out.println("Partida no existe.");
             return;
         }
 

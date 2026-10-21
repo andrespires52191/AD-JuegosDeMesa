@@ -40,6 +40,10 @@ public class App {
 
         // titulo inicio
         Asociacion asociacion = asociacionDao.getAsociacion();
+        if (asociacion == null) {
+            System.out.println("Error al cargar datos, la aplicación no puede arrancar.");
+            return;
+        }
         System.out.println(asociacion);
         System.out.println(asociacion.toString().replaceAll(".", "="));
         System.out.println();

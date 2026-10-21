@@ -85,7 +85,14 @@ public class GestionJuegos {
             String propietaria_str = preguntar("propietaria_id: ");
             LocalDate fechaAlta = LocalDate.parse(preguntar("fechaAlta: "));
 
+            if (minJugadores <= 0 || maxJugadores < minJugadores) {
+                System.out.println("Los valores de mínimo y máximo son incorrectos.");
+                return null;
+            }
+
             int propietaria_id = propietaria_str.isEmpty() ? 0 : Integer.parseInt(propietaria_str);
+
+            // Cuando la propietaria es NULL significa que el juego pertenece a la asociación.
             Socia propietaria = null;
             if (propietaria_id > 0) {
                 propietaria = repoSocia.getSocia(propietaria_id);
