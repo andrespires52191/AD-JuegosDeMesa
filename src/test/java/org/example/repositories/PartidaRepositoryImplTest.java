@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class PartidaRepositoryImplTest {
     private PartidaRepositoryImpl partidaRepo = new PartidaRepositoryImpl(new PartidaDaoImpl(), new JuegoDaoImpl());
     private JuegoRepositoryImpl juegoRepo = new JuegoRepositoryImpl(new JuegoDaoImpl());
@@ -30,8 +32,8 @@ class PartidaRepositoryImplTest {
                 JuegoEstado.DISPONIBLE,
                 null,
                 LocalDate.parse("2026-10-01"));
-        assert juegoRepo.add(juego);
-        assert juego.getId() > 0;
+        assertTrue(juegoRepo.add(juego));
+        assertTrue(juego.getId() > 0);
 
         Partida partida = new Partida(
                 juego,
@@ -41,29 +43,29 @@ class PartidaRepositoryImplTest {
         );
 
         // comprobar creacion
-        assert partidaRepo.add(partida);
+        assertTrue(partidaRepo.add(partida));
         // comprobar id actualizado
-        assert partida.getId() > 0;
+        assertTrue(partida.getId() > 0);
         // volver a comprobar creacion
         partida = partidaRepo.getPartida(partida.getId());
-        assert partida != null;
+        assertNotNull(partida);
 
         // comprobar actualizacion
         LocalTime nuevaHora = LocalTime.parse("14:00");
         partida.setHora(nuevaHora);
-        assert partidaRepo.update(partida);
+        assertTrue(partidaRepo.update(partida));
         // volver a comprobar actualizacion
         partida = partidaRepo.getPartida(partida.getId());
-        assert partida.getHora().equals(nuevaHora);
+        assertEquals(partida.getHora(), nuevaHora);
 
         // comprobar borrado
-        assert partidaRepo.delete(partida.getId());
+        assertTrue(partidaRepo.delete(partida.getId()));
         // volver comprobar borrado
         partida = partidaRepo.getPartida(partida.getId());
-        assert partida == null;
+        assertNull(partida);
 
         // limpiar
-        assert juegoRepo.delete(juego.getId());
+        assertTrue(juegoRepo.delete(juego.getId()));
     }
 
     @Test
@@ -79,7 +81,7 @@ class PartidaRepositoryImplTest {
                 JuegoEstado.DISPONIBLE,
                 null,
                 LocalDate.parse("2026-10-01"));
-        assert juegoRepo.add(juego);
+        assertTrue(juegoRepo.add(juego));
 
         Partida partida = new Partida(
                 juego,
@@ -87,7 +89,7 @@ class PartidaRepositoryImplTest {
                 LocalTime.parse("12:00"),
                 5
         );
-        assert partidaRepo.add(partida);
+        assertTrue(partidaRepo.add(partida));
 
         Socia socia = new Socia(
                 "dni",
@@ -96,27 +98,27 @@ class PartidaRepositoryImplTest {
                 LocalDate.parse("1999-01-01"),
                 "123456789",
                 "email");
-        assert sociaRepo.add(socia);
+        assertTrue(sociaRepo.add(socia));
 
         // comprobar agregar
-        //assert partidaRepo.agregarJugadoraInvitada(partida.getId(), "jugadora1");
-        assert partidaRepo.agregarJugadoraSocia(partida.getId(), socia);
-        assert partidaRepo.getJugadoras(partida.getId()).size() == 1;
-        assert partidaRepo.agregarJugadoraInvitada(partida.getId(), "jugadora2");
-        assert partidaRepo.getJugadoras(partida.getId()).size() == 2;
+        //assertTrue(partidaRepo.agregarJugadoraInvitada(partida.getId(), "jugadora1"));
+        assertTrue(partidaRepo.agregarJugadoraSocia(partida.getId(), socia));
+        assertEquals(1, partidaRepo.getJugadoras(partida.getId()).size());
+        assertTrue(partidaRepo.agregarJugadoraInvitada(partida.getId(), "jugadora2"));
+        assertEquals(2, partidaRepo.getJugadoras(partida.getId()).size());
 
         // comprobar quitar
-        //assert partidaRepo.quitarJugadoraInvitada(partida.getId(), "jugadora1");
-        assert partidaRepo.quitarJugadoraSocia(partida.getId(), socia);
-        assert partidaRepo.getJugadoras(partida.getId()).size() == 1;
-        assert partidaRepo.getJugadoras(partida.getId()).get(0).equals("jugadora2");
+        //assertTrue(partidaRepo.quitarJugadoraInvitada(partida.getId(), "jugadora1"));
+        assertTrue(partidaRepo.quitarJugadoraSocia(partida.getId(), socia));
+        assertEquals(1, partidaRepo.getJugadoras(partida.getId()).size());
+        assertEquals("jugadora2", partidaRepo.getJugadoras(partida.getId()).get(0));
 
         // comprobar borrado
-        assert partidaRepo.delete(partida.getId());
-        assert partidaRepo.getJugadoras(partida.getId()).isEmpty();
+        assertTrue(partidaRepo.delete(partida.getId()));
+        assertTrue(partidaRepo.getJugadoras(partida.getId()).isEmpty());
 
         // limpiar
-        assert juegoRepo.delete(juego.getId());
-        assert sociaRepo.delete(socia.getId());
+        assertTrue(juegoRepo.delete(juego.getId()));
+        assertTrue(sociaRepo.delete(socia.getId()));
     }
 }

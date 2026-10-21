@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class JuegoRepositoryImplTest {
     private JuegoRepositoryImpl juegoRepo = new JuegoRepositoryImpl(new JuegoDaoImpl());
     private SociaRepositoryImpl sociaRepo = new SociaRepositoryImpl(new SociaDaoImpl());
@@ -23,7 +25,7 @@ class JuegoRepositoryImplTest {
                 "123456789",
                 "email");
         sociaRepo.add(socia);
-        assert socia.getId() > 0;
+        assertTrue(socia.getId() > 0);
 
         Juego juego = new Juego(
                 "nombre",
@@ -38,27 +40,27 @@ class JuegoRepositoryImplTest {
                 LocalDate.parse("2026-10-01"));
 
         // comprobar creacion
-        assert juegoRepo.add(juego);
+        assertTrue(juegoRepo.add(juego));
         // comprobar id actualizado
-        assert juego.getId() > 0;
+        assertTrue(juego.getId() > 0);
         // volver a comprobar creacion
         juego = juegoRepo.getJuego(juego.getId());
-        assert juego != null;
+        assertNotNull(juego);
 
         // comprobar actualizacion
         String nuevosAutores = "autor3";
         juego.setAutores(nuevosAutores);
-        assert juegoRepo.update(juego);
+        assertTrue(juegoRepo.update(juego));
         // volver a comprobar actualizacion
         juego = juegoRepo.getJuego(juego.getId());
-        assert juego.getAutores().equals(nuevosAutores);
+        assertEquals(nuevosAutores, juego.getAutores());
 
         // comprobar borrado
-        assert juegoRepo.delete(juego.getId());
+        assertTrue(juegoRepo.delete(juego.getId()));
         // volver comprobar borrado
-        assert juegoRepo.getJuego(juego.getId()) == null;
+        assertNull(juegoRepo.getJuego(juego.getId()));
 
         // limpiar
-        assert sociaRepo.delete(socia.getId());
+        assertTrue(sociaRepo.delete(socia.getId()));
     }
 }

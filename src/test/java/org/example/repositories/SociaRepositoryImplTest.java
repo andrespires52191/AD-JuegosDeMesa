@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class SociaRepositoryImplTest {
     private SociaRepositoryImpl sociaRepo = new SociaRepositoryImpl(new SociaDaoImpl());
 
@@ -20,24 +22,24 @@ class SociaRepositoryImplTest {
                 "email");
 
         // comprobar creacion
-        assert sociaRepo.add(socia);
+        assertTrue(sociaRepo.add(socia));
         // comprobar id actualizado
-        assert socia.getId() > 0;
+        assertTrue(socia.getId() > 0);
         // volver a comprobar creacion
         socia = sociaRepo.getSocia(socia.getId());
-        assert socia != null;
+        assertNotNull(socia);
 
         // comprobar actualizacion
         String nuevoTelefono = "987654321";
         socia.setTelefono(nuevoTelefono);
-        assert sociaRepo.update(socia);
+        assertTrue(sociaRepo.update(socia));
         // volver a comprobar actualizacion
         socia = sociaRepo.getSocia(socia.getId());
-        assert socia.getTelefono().equals(nuevoTelefono);
+        assertEquals(nuevoTelefono, socia.getTelefono());
 
         // comprobar borrado
-        assert sociaRepo.delete(socia.getId());
+        assertTrue(sociaRepo.delete(socia.getId()));
         // volver comprobar borrado
-        assert sociaRepo.getSocia(socia.getId()) == null;
+        assertNull(sociaRepo.getSocia(socia.getId()));
     }
 }
