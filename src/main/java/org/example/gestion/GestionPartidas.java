@@ -119,22 +119,22 @@ public class GestionPartidas {
         Partida partida = null;
         try {
             int juego_id = Integer.parseInt(preguntar("juego_id: "));
-            LocalDate fecha = LocalDate.parse(preguntar("fecha: "));
-            int plazasDeseadas = Integer.parseInt(preguntar("plazasDeseadas: "));
-            LocalTime hora = LocalTime.parse(preguntar("hora: "));
-
             Juego juego = repoJuego.getJuego(juego_id);
             if (juego == null) {
                 System.out.println("Juego no existe");
                 return null;
             }
-
             int min = juego.getMinJugadores();
             int max = juego.getMaxJugadores();
+
+            int plazasDeseadas = Integer.parseInt(preguntar("plazasDeseadas (entre " + min + " y " + max + "): "));
             if (plazasDeseadas < min || plazasDeseadas > max) {
-                System.out.println("Las plazas deben estar entre " + min + " y " + max);
+                System.out.println("El juego necesita que las estén entre " + min + " y " + max);
                 return null;
             }
+
+            LocalDate fecha = LocalDate.parse(preguntar("fecha: "));
+            LocalTime hora = LocalTime.parse(preguntar("hora: "));
 
             partida = new Partida(juego, fecha, hora, plazasDeseadas);
         } catch (Exception ignored) {
