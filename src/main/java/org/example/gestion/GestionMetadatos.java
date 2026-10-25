@@ -122,7 +122,6 @@ public class GestionMetadatos {
         if (metadatos.isEmpty()) {
             System.out.println("Error al extraer metadatos");
         } else {
-
             // asegurarse de que existe carpeta de salida
             File carpeta = new File("datos_exportados");
             carpeta.mkdirs();
@@ -136,6 +135,8 @@ public class GestionMetadatos {
                 FileOutputStream fos = new FileOutputStream(archivo);
                 fos.write(metadatos.getBytes());
                 fos.close();
+
+                System.out.println("Exportado con éxito.");
             } catch (IOException e) {
                 System.out.println("Error al guardar el archivo");
             }
